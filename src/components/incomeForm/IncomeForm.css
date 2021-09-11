@@ -1,0 +1,25 @@
+.form-col label{
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.form-col-inner{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+.form-col-inner input{
+    padding: 5px 15px;
+    border-radius: 6px;
+    border: 1px solid rgb(228, 228, 228);
+}
+.form-col-inner input:focus{
+    border: 1px solid var(--bs-blue);
+    outline: none !important ;
+}
+.errors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--bs-danger);
+}

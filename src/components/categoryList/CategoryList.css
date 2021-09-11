@@ -1,0 +1,13 @@
+.net-amount{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.net-amount h4{
+    margin: unset;
+    font-size: 22px;
+}
+.net-amount h4:last-child{
+    color: var(--green-money);
+    font-weight: 400;
+}

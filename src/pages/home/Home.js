@@ -1,4 +1,6 @@
 import React from 'react'
+import CategoryList from '../../components/categoryList/CategoryList'
+import NewTransaction from '../../components/newTransaction/NewTransaction'
 import './Home.css'
 export default function Home() {
     return (
@@ -13,8 +15,12 @@ export default function Home() {
                 </section>
                 
                 <section className="UI-main">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque sequi nostrum accusamus, animi doloribus id quibusdam tempore laudantium nemo, placeat repellat cumque odio quis ipsam sunt voluptas cupiditate labore eius!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque sequi nostrum accusamus, animi doloribus id quibusdam tempore laudantium nemo, placeat repellat cumque odio quis ipsam sunt voluptas cupiditate labore eius!</p>
+                    <section className="category-list">
+                        <CategoryList/>
+                    </section>
+                    <section className="transactions">
+                        <NewTransaction/>
+                    </section>
                 </section>
                 
             </main>

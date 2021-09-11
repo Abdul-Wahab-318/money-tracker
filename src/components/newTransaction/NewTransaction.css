@@ -1,0 +1,26 @@
+.new-transaction-component{
+    
+}
+.transaction-tabs{
+    gap: 10px;
+}
+.transaction-tabs .active{
+    border: 2px solid var(--bs-blue);
+    color: var(--bs-blue);
+}
+.transaction-tab{
+    flex : 1 ;
+    border: 2px solid;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px 0;
+    transition: var(--simple-transition);
+}
+.transaction-tab:hover{
+    border:  2px solid var(--bs-blue);
+}
+
+.transaction-table{
+    margin-top: 20px;
+    padding: 0 10px;
+}

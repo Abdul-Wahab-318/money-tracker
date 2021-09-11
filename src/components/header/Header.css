@@ -1,4 +1,5 @@
 .header-component{
+    position: relative;
     background-color: var(--bs-primary);
     padding: 12px 50px;
     box-shadow: -1px 5px 28px -1px rgba(0,0,0,0.14);
