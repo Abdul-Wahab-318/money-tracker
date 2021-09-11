@@ -1,0 +1,32 @@
+.header-component{
+    background-color: var(--bs-primary);
+    padding: 12px 50px;
+    box-shadow: -1px 5px 28px -1px rgba(0,0,0,0.14);
+    -webkit-box-shadow: -1px 5px 28px -1px rgba(0,0,0,0.14);
+    -moz-box-shadow: -1px 5px 28px -1px rgba(0,0,0,0.14);
+
+}
+.header-logo{
+    display: flex;
+    gap: 20px;
+}
+
+.header-logo h1{
+    font-size: 35px;
+    color: white;
+    font-family: 'Pacifico', cursive;
+}
+
+.nav-links a{
+    color: var(--bs-primary);
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: var(--simple-transition);
+}
+.nav-links a:hover{
+    box-shadow:  0 0 0px 3px  white;
+    background-color: var(--bs-primary);
+    color: white;
+    border-radius: 12px;
+}

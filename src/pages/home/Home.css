@@ -1,0 +1,31 @@
+.home-component{
+    background-color: rgb(246, 244, 244);
+    min-height: 100vh;
+}
+.UI-parent{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.intro{
+    background-color: var(--bs-white);
+    padding: 30px 60px;
+    border-radius: 20px;
+    transition: all 300ms ease;
+}
+.intro:hover{
+    transform: scale(1.04);
+}
+.intro i{
+    font-size: 50px;
+}
+
+.UI-main{
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px;
+    background-color: var(--bs-white);
+}
