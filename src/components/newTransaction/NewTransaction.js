@@ -4,7 +4,7 @@ import ExpenseForm from '../expenseForm/ExpenseForm'
 import IncomeForm from '../incomeForm/IncomeForm'
 export default function NewTransaction() {
 
-    let [activeTransaction , setActiveTransaction ] = React.useState("expense")
+    let [activeTransaction , setActiveTransaction ] = React.useState("income")
 
     let handleToggle = (element)=>{
         setActiveTransaction(element.target.innerText.toLowerCase())

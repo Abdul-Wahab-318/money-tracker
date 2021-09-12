@@ -16,3 +16,6 @@ html , body{
     padding: 0 20px;
     margin:  0 auto;
 }
+.text-green{
+    color: var(--green-money);
+}

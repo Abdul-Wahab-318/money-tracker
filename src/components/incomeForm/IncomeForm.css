@@ -45,4 +45,8 @@
     .errors {
         font-size: 13px;
     }
+    .form-col-inner button[type= "submit"]{
+        width: 65%;
+        margin: 0 auto;
+    }
 }

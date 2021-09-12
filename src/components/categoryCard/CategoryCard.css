@@ -1,0 +1,24 @@
+.category-card{
+    border-radius: 4px;
+    border: 1px solid var(--bs-light);
+}
+.category-heading {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(246, 244, 244);;
+
+}
+.category-heading h4{
+    font-size: 18px;
+    padding: 10px ;
+    margin: unset;
+}
+
+.sub-categories{
+    padding: 10px 10px;
+    
+}
+.sub-categories div{
+    display: flex;
+    justify-content: space-between;
+}

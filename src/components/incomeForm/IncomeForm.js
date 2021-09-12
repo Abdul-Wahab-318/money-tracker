@@ -1,11 +1,14 @@
 import React from 'react'
 import './IncomeForm.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import {store} from '../../redux/store' 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 export default function IncomeForm() {
+
+    const categoryTags =   [ ...new Set(useSelector(state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
+    const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  //REMOVE REPEATED TAGS-
     const dispatch = useDispatch()
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${date.getMonth().toString()} / ${date.getFullYear().toString()}`
@@ -29,7 +32,8 @@ export default function IncomeForm() {
             .required('Tags are Required'),
 
           subCategory: Yup.string()
-          .max(20, 'Must be 20 characters or less'),
+          .max(20, 'Must be 20 characters or less')
+          .required("Sub Category is required"),
           
           amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
           note: Yup.string()
@@ -37,7 +41,7 @@ export default function IncomeForm() {
 
         }),
         onSubmit: values => {
-            if(values.subCategory === "") delete values.subCategory
+            if(values.subCategory === '') delete values.subCategory
 
             const state = store.getState().category.length
             if(state === 0)
@@ -62,7 +66,7 @@ export default function IncomeForm() {
                     <input list="to" type="text" placeholder="Select or add new category"
                     {...formik.getFieldProps('to')} />
                     <datalist id="to">
-                        
+                        {categoryTags.map( (el,ind) => <option key={ind} >{el}</option> )}
                     </datalist>
                     <input type="number" placeholder = "Amount" 
                     {...formik.getFieldProps('amount')}/>
@@ -70,6 +74,7 @@ export default function IncomeForm() {
                 </div>
                 <div className="errors">
                     {formik.touched.to && formik.errors.to ? (<div>{formik.errors.to}</div>) : null}
+                    {formik.touched.subCategory && formik.errors.subCategory ? (<div>{formik.errors.subCategory}</div>) : null}
                     {formik.touched.amount && formik.errors.amount ? (<div>{formik.errors.amount}</div>) : null}
                 </div>
             </div>
@@ -79,8 +84,8 @@ export default function IncomeForm() {
                 <div className="form-col-inner">
                     <input list="tags" type="text" placeholder="Choose existing or add new" 
                     {...formik.getFieldProps('tags')}/>
-                    <datalist id="tags">
-                        
+                    <datalist id="tags" >
+                        {incomeTags.map((el,ind)=> <option key={ind}>{el}</option>)}
                     </datalist>
                     <input type="text" disabled placeholder = {currentDate} />
                 </div>
