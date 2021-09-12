@@ -22,7 +22,7 @@ export default function IncomeForm() {
           to: Yup.string()
             .max(20, 'Must be 20 characters or less')
             .min(3, "Must be 3 characters or less")
-            .required('This field is required'),
+            .required('Category is required'),
 
           tags: Yup.string()
             .max(20, 'Must be 20 characters or less')

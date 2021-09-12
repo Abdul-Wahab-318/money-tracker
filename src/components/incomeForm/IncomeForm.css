@@ -31,3 +31,18 @@
     align-items: center;
     color: var(--bs-danger);
 }
+
+
+@media (max-width : 576px) {
+    .form-col-inner{
+        grid-template-columns:1fr;
+        gap: 20px;
+    }
+    .form-col-inner input{
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+    .errors {
+        font-size: 13px;
+    }
+}

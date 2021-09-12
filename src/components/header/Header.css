@@ -31,3 +31,23 @@
     color: white;
     border-radius: 12px;
 }
+
+
+@media (max-width : 576px){
+    .header-component{
+        padding: 12px 15px;
+    }
+    .header-logo{
+        gap: 10px;
+    }
+    .header-logo a h1{
+        font-size: 20px;
+    }
+    .header-logo a img{
+        width: 30px;
+    }
+    .nav-links a{
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+}
