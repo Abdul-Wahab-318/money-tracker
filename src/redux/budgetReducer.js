@@ -3,6 +3,7 @@ let initialState = {
     category : [] ,
     incomeTags : [] ,
     categoryTags : [] ,
+    subCategoryTags : [],
     expenseTags : [] ,
     transactions : [],
     transfers : [] 
@@ -117,6 +118,7 @@ export let budgetReducer = (state = initialState , action) => {
                         date : new Date().toDateString()
                     }   
                 ],
+                subCategoryTags : [ {subCategory : action.payload.subCategory , mainCategory : action.payload.to } ],
                 incomeTags : [action.payload.tags] ,
                 categoryTags : [...state.categoryTags , action.payload.to]
 
@@ -145,7 +147,14 @@ export let budgetReducer = (state = initialState , action) => {
                             date : new Date().toDateString()
                         }   
                     ],
-                    categoryTags : [...state.categoryTags , action.payload.to],
+                    subCategoryTags : [...new Set( 
+                        [
+                            ...state.subCategoryTags ,
+                            {subCategory : action.payload.subCategory , mainCategory : action.payload.to}
+                        ] 
+                        )],
+
+                    categoryTags : [...new Set( [...state.categoryTags , action.payload.to] )],
                     incomeTags : [...state.incomeTags , action.payload.tags]
                 }
             }
@@ -176,7 +185,13 @@ export let budgetReducer = (state = initialState , action) => {
                         date : new Date().toDateString()
                     }   
                 ],
-                categoryTags : [...state.categoryTags , action.payload.to],
+                subCategoryTags : [...new Set( 
+                    [
+                        ...state.subCategoryTags ,
+                        {subCategory : action.payload.subCategory , mainCategory : action.payload.to}
+                    ] 
+                    )],
+                categoryTags : [...new Set( [...state.categoryTags , action.payload.to] )],
                 incomeTags : [...state.incomeTags , action.payload.tags]
 
             }

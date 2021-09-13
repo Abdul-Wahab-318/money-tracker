@@ -7,11 +7,14 @@ import * as Yup from 'yup';
 
 export default function IncomeForm() {
 
-    const categoryTags =   [ ...new Set(useSelector(state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
-    const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  //REMOVE REPEATED TAGS-
+    const categoryTags = useSelector(state => state.categoryTags)
+    const subCategoryTags = useSelector(state => state.subCategoryTags)
+    const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
+
     const dispatch = useDispatch()
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${date.getMonth().toString()} / ${date.getFullYear().toString()}`
+
     const formik = useFormik({
         initialValues: {
           to: '',
@@ -70,7 +73,10 @@ export default function IncomeForm() {
                     </datalist>
                     <input type="number" placeholder = "Amount" 
                     {...formik.getFieldProps('amount')}/>
-                    <input type="text" placeholder="Add a sub category ?" className="w-100" {...formik.getFieldProps('subCategory')}/>
+                    <input list="subCategory" type="text" placeholder="Add a sub category ?" className="w-100" {...formik.getFieldProps('subCategory')}/>
+                    <datalist id="subCategory">
+                       
+                    </datalist>
                 </div>
                 <div className="errors">
                     {formik.touched.to && formik.errors.to ? (<div>{formik.errors.to}</div>) : null}
