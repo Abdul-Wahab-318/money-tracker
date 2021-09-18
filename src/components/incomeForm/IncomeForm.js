@@ -19,6 +19,10 @@ export default function IncomeForm() {
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
     //JAVASCRIPT MONTHS START AT 0TH INDEX
 
+    let isSameSubCategoryName = (subCategoryTags , mainCategory , subCategory ) => {  //ENSURES EACH SUB CATEGORY IS UNIQUE
+        return subCategoryTags.some( el => el.subCategory == subCategory && el.mainCategory !== mainCategory )
+    } 
+
     const formik = useFormik({
         initialValues: {
           to: 'wallet',
@@ -48,16 +52,22 @@ export default function IncomeForm() {
 
         }),
         onSubmit: values => {
-            if(values.subCategory === '') delete values.subCategory
 
-            const state = store.getState().category.length
-            if(state === 0)
+            const state = store.getState()
+            
+            if(state.category.length === 0)
             {
                 dispatch({type : 'ADD_FIRST_INCOME' , payload: values})
                 alert.success("Income Added")
                 return 
             }
-            
+
+            if(isSameSubCategoryName(state.subCategoryTags , values.to , values.subCategory))
+            {
+                console.log("CATEGORY NAME DIFFERENT BUT SUB CAT SAME ")
+                alert.error("Sub category must be unique")
+                return
+            }
             
             dispatch({type : 'ADD_INCOME' , payload: values})
             alert.success("Income Added")

@@ -32,7 +32,7 @@ export default function ExpenseForm() {
         validationSchema: Yup.object({
 
           from: Yup.string()
-            .required('Category is required'),
+            .required('Sub Category is required'),
 
           tags: Yup.string()
             .max(20, 'Must be 20 characters or less')
@@ -47,7 +47,7 @@ export default function ExpenseForm() {
             const state = store.getState().category.length
             if(state === 0) //IF NO CARTEGORY EXISTS
             {
-                alert.error("first add income")    
+                alert.error("Category not found")    
                 return
             }
 
@@ -89,7 +89,7 @@ export default function ExpenseForm() {
                     {...formik.getFieldProps('amount')}/>
                 </div>
                 <div className="errors">
-                    {formik.touched.to && formik.errors.from ? (<div>{formik.errors.from}</div>) : null}
+                    {formik.touched.from && formik.errors.from ? (<div>{formik.errors.from}</div>) : null}
                     {formik.touched.amount && formik.errors.amount ? (<div>{formik.errors.amount}</div>) : null}
                 </div>
             </div>

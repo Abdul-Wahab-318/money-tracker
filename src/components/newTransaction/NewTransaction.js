@@ -17,7 +17,7 @@ export default function NewTransaction() {
                 return <ExpenseForm/>
             
             case "transfer" : 
-                return "transfer"
+                return "Under Development ..."
 
             case "income" :
                 return <IncomeForm/>

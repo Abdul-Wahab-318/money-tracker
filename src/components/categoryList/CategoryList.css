@@ -1,3 +1,18 @@
+.category-list-component{
+    height: 100%;
+    position: relative;
+}
+.empty-list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 300;
+    color: rgb(179, 176, 176);
+}
 .net-amount{
     display: flex;
     justify-content: space-between;
@@ -11,3 +26,4 @@
     color: var(--green-money);
     font-weight: 400;
 }
+

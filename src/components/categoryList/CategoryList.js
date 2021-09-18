@@ -16,7 +16,11 @@ export default function CategoryList() {
                 <h4 className="text-green">{netAmount} PKR </h4>
             </div>
             <div className="categories-list">
-                {allCategories.map( (el,ind) => <CategoryCard  key={ind} category={el} /> )}
+                { 
+                allCategories.length == 0 ? 
+
+                <div className="empty-list d-none d-sm-block">Add an Income</div> : allCategories.map( (el,ind) => <CategoryCard  key={ind} category={el} /> )}
+
             </div>
         </main>
     )
