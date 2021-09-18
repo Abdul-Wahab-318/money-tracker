@@ -10,27 +10,28 @@ export default function ExpenseForm() {
     
     const dispatch = useDispatch()
     const alert = useAlert()
-    
-    const categoryTags =   [ ...new Set(useSelector(state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
-    const subCategoryTags = useSelector(state=> state.category.map((el,ind) =>  el.subCategory.map(el=> el.title) ))
+
+    //const categoryTags =   [ ...new Set(useSelector( state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
+    const subCategoryTags = useSelector(state=> state.subCategoryTags.map( el =>  el.subCategory ))
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
     //JAVASCRIPT MONTHS START AT 0TH INDEX
 
+    let doesSubCategoryExist = (subCategory)=>{
+        return subCategoryTags.some( subCat => subCat === subCategory )
+    } 
+
     const formik = useFormik({
         initialValues: {
-          to: '',
-          subCategory : '',
+          from: '',
           tags: '',
           amount: '',
           note : ''
         },
         validationSchema: Yup.object({
 
-          to: Yup.string()
-            .max(20, 'Must be 20 characters or less')
-            .min(3, "Must be 3 characters or less")
+          from: Yup.string()
             .required('Category is required'),
 
           tags: Yup.string()
@@ -43,37 +44,52 @@ export default function ExpenseForm() {
 
         }),
         onSubmit: values => {
-            if(values.subCategory === '') delete values.subCategory
-
             const state = store.getState().category.length
-            if(state === 0)
+            if(state === 0) //IF NO CARTEGORY EXISTS
             {
-                
+                alert.error("first add income")    
+                return
             }
 
+            if(!doesSubCategoryExist(values.from)) //IF NO SUCH NAMED SUB CATEGORY EXISTS
+            {
+                alert.error("Sub Category not found")
+                return
+            }
 
-            dispatch({type : 'ADD_INCOME' , payload: values})
+            let mainCategoryName = store.getState().subCategoryTags.find( el => el.subCategory === values.from ).mainCategory
+            let mainCategory = store.getState().category.find( el => el.title === mainCategoryName )
+            let subCategoryAmount = mainCategory.subCategory.find( el => el.title === values.from ).amount
+
+            if( subCategoryAmount < values.amount )
+            {
+                alert.error("Amount exceeds total")
+                return
+            }
+
+            dispatch({type : "ADD_EXPENSE" , payload : {...values , mainCategoryName } })
+
             console.log(values);
         },
       });
 
     return (
         <div className="income-form-component">
-            <form action="" onSubmit={formik.handleSubmit}>
+            <form action="" onSubmit={formik.handleSubmit} autoComplete="off">
 
             <div className="form-col mb-3">
                 <label htmlFor="">From</label>
                 <div className="form-col-inner">
-                    <input list="to" type="text" placeholder="Select or add new category"
-                    {...formik.getFieldProps('to')} />
+                    <input list="to" type="text" placeholder="Select Existing Sub Category"
+                    {...formik.getFieldProps('from')} />
                     <datalist id="to">
-                        {categoryTags.map( (el,ind) => <option key={ind} >{el}</option> )}
+                        {subCategoryTags.map( (el,i) => <option key={i} value={el}> {el} </option>)}
                     </datalist>
                     <input type="number" placeholder = "Amount" 
                     {...formik.getFieldProps('amount')}/>
                 </div>
                 <div className="errors">
-                    {formik.touched.to && formik.errors.to ? (<div>{formik.errors.to}</div>) : null}
+                    {formik.touched.to && formik.errors.from ? (<div>{formik.errors.from}</div>) : null}
                     {formik.touched.amount && formik.errors.amount ? (<div>{formik.errors.amount}</div>) : null}
                 </div>
             </div>

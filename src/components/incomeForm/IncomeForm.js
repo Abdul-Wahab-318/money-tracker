@@ -21,11 +21,11 @@ export default function IncomeForm() {
 
     const formik = useFormik({
         initialValues: {
-          to: '',
-          subCategory : '',
-          tags: '',
-          amount: '',
-          note : ''
+          to: 'wallet',
+          subCategory : 'primary',
+          tags: 'none',
+          amount: 1000,
+          note : 'none'
         },
         validationSchema: Yup.object({
 
@@ -67,7 +67,7 @@ export default function IncomeForm() {
 
     return (
         <div className="income-form-component">
-            <form action="" onSubmit={formik.handleSubmit}>
+            <form action="" onSubmit={formik.handleSubmit} autoComplete="off">
 
             <div className="form-col mb-3">
                 <label htmlFor="">To</label>

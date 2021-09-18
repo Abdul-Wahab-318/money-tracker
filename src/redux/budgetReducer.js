@@ -197,10 +197,38 @@ export let budgetReducer = (state = initialState , action) => {
             }
         
         case "ADD_EXPENSE" :
-            return state
-
 
             
+            let { mainCategoryName } = action.payload
+            let toBeUpdated = state.category.find(el=> el.title === mainCategoryName)
+            toBeUpdated.amount -= action.payload.amount
+
+            return {
+                ...state ,
+                category : [
+                    ...state.category.filter(el=> el.title !== mainCategoryName) , // categories that dont need to be changed
+                    {
+                        ...toBeUpdated,
+                        subCategory : toBeUpdated.subCategory.map(el => {
+                            if(el.title === action.payload.from)
+                            {
+                                el.amount -= action.payload.amount
+                            }
+                            return el
+                        })
+                    }
+                ] ,
+
+                expenseTags : [... new Set([...state.expenseTags , action.payload.tags])] ,
+                transactions : [
+                    ...state.transactions , 
+                    {to : action.payload.tags , from: action.payload.from , amount : action.payload.amount}
+                ]
+
+            
+            }
+
+
         default : 
         return state
 
