@@ -195,8 +195,12 @@ export let budgetReducer = (state = initialState , action) => {
                 incomeTags : [...state.incomeTags , action.payload.tags]
 
             }
+        
+        case "ADD_EXPENSE" :
+            return state
 
 
+            
         default : 
         return state
 

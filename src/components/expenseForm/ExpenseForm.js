@@ -3,16 +3,21 @@ import './ExpenseForm.css'
 import { useDispatch , useSelector} from 'react-redux';
 import {store} from '../../redux/store' 
 import { useFormik } from 'formik';
+import {useAlert} from 'react-alert'
 import * as Yup from 'yup';
 
 export default function ExpenseForm() {
-
+    
+    const dispatch = useDispatch()
+    const alert = useAlert()
+    
     const categoryTags =   [ ...new Set(useSelector(state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
     const subCategoryTags = useSelector(state=> state.category.map((el,ind) =>  el.subCategory.map(el=> el.title) ))
-    console.log(subCategoryTags ,"subcat tags")
-    const dispatch = useDispatch()
+
     let date = new Date()
-    let currentDate = `${date.getDate().toString()} / ${date.getMonth().toString()} / ${date.getFullYear().toString()}`
+    let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
+    //JAVASCRIPT MONTHS START AT 0TH INDEX
+
     const formik = useFormik({
         initialValues: {
           to: '',
@@ -31,10 +36,6 @@ export default function ExpenseForm() {
           tags: Yup.string()
             .max(20, 'Must be 20 characters or less')
             .required('Tags are Required'),
-
-          subCategory: Yup.string()
-          .max(20, 'Must be 20 characters or less')
-          .required("Sub Category is required"),
           
           amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
           note: Yup.string()
@@ -47,8 +48,7 @@ export default function ExpenseForm() {
             const state = store.getState().category.length
             if(state === 0)
             {
-                dispatch({type : 'ADD_FIRST_INCOME' , payload: values})
-                return 
+                
             }
 
 
@@ -71,11 +71,9 @@ export default function ExpenseForm() {
                     </datalist>
                     <input type="number" placeholder = "Amount" 
                     {...formik.getFieldProps('amount')}/>
-                    <input type="text" placeholder="Add a sub category ?" className="w-100" {...formik.getFieldProps('subCategory')}/>
                 </div>
                 <div className="errors">
                     {formik.touched.to && formik.errors.to ? (<div>{formik.errors.to}</div>) : null}
-                    {formik.touched.subCategory && formik.errors.subCategory ? (<div>{formik.errors.subCategory}</div>) : null}
                     {formik.touched.amount && formik.errors.amount ? (<div>{formik.errors.amount}</div>) : null}
                 </div>
             </div>

@@ -3,17 +3,21 @@ import './IncomeForm.css'
 import { useDispatch , useSelector} from 'react-redux';
 import {store} from '../../redux/store' 
 import { useFormik } from 'formik';
+import {useAlert} from 'react-alert'
 import * as Yup from 'yup';
 
 export default function IncomeForm() {
+
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const categoryTags = useSelector(state => state.categoryTags)
     const subCategoryTags = useSelector(state => state.subCategoryTags)
     const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
 
-    const dispatch = useDispatch()
     let date = new Date()
-    let currentDate = `${date.getDate().toString()} / ${date.getMonth().toString()} / ${date.getFullYear().toString()}`
+    let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
+    //JAVASCRIPT MONTHS START AT 0TH INDEX
 
     const formik = useFormik({
         initialValues: {
@@ -50,11 +54,13 @@ export default function IncomeForm() {
             if(state === 0)
             {
                 dispatch({type : 'ADD_FIRST_INCOME' , payload: values})
+                alert.success("Income Added")
                 return 
             }
-
-
+            
+            
             dispatch({type : 'ADD_INCOME' , payload: values})
+            alert.success("Income Added")
             console.log(values);
         },
       });
