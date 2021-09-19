@@ -59,6 +59,7 @@ export default function IncomeForm() {
             {
                 dispatch({type : 'ADD_FIRST_INCOME' , payload: values})
                 alert.success("Income Added")
+                resetForm()
                 return 
             }
 
