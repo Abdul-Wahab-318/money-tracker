@@ -25,11 +25,11 @@ export default function IncomeForm() {
 
     const formik = useFormik({
         initialValues: {
-          to: 'wallet',
-          subCategory : 'primary',
+          to: '',
+          subCategory : '',
           tags: 'none',
-          amount: 1000,
-          note : 'none'
+          amount: '',
+          note : ''
         },
         validationSchema: Yup.object({
 
