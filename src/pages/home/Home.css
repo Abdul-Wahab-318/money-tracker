@@ -27,11 +27,14 @@
     gap: 35px;
   
 }
-.UI-main :is(.category-list  , .transactions) {
+.UI-main :is(.category-list  , .transactions , .recent-transactions) {
     background-color: var(--bs-white);
     padding: 20px;
     border-radius: 20px;
 
+}
+.recent-transactions {
+    grid-column:  2 / 3 ;
 }
 .lead-text{
     font-size: 22px;
@@ -68,7 +71,9 @@
         grid-template-columns: 1fr;
         gap: 30px;
     }
-
+    .recent-transactions {
+        grid-column: unset;
+    }
     .category-list-component .net-amount h4{
         font-size: 18px;
     }

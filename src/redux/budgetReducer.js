@@ -112,7 +112,9 @@ export let budgetReducer = (state = initialState , action) => {
                 ],
                 transactions : [
                     {
-                        to : action.payload.to ,
+                        id : Math.random().toString(36).slice(2,10),
+                        type : 'income',
+                        to : action.payload.subCategory ,
                         from : action.payload.tags ,
                         amount : action.payload.amount ,
                         date : new Date().toDateString()
@@ -141,7 +143,9 @@ export let budgetReducer = (state = initialState , action) => {
                     transactions : [
                         ...state.transactions ,
                         {
-                            to : action.payload.to ,
+                            id : Math.random().toString(36).slice(2,10),
+                            type : 'income',
+                            to : action.payload.subCategory ,
                             from : action.payload.tags ,
                             amount : action.payload.amount ,
                             date : new Date().toDateString()
@@ -179,7 +183,9 @@ export let budgetReducer = (state = initialState , action) => {
                 transactions : [
                     ...state.transactions ,
                     {
-                        to : action.payload.to ,
+                        id : Math.random().toString(36).slice(2,10),
+                        type : 'income',
+                        to : action.payload.subCategory ,
                         from : action.payload.tags ,
                         amount : action.payload.amount ,
                         date : new Date().toDateString()
@@ -222,7 +228,14 @@ export let budgetReducer = (state = initialState , action) => {
                 expenseTags : [... new Set([...state.expenseTags , action.payload.tags])] ,
                 transactions : [
                     ...state.transactions , 
-                    {to : action.payload.tags , from: action.payload.from , amount : action.payload.amount}
+                    {
+                        id : Math.random().toString(36).slice(2,10),
+                        type : 'expense',
+                        to : action.payload.tags ,
+                        from: action.payload.from ,
+                        amount : action.payload.amount,
+                        date : new Date().toDateString()
+                    }
                 ]
 
             

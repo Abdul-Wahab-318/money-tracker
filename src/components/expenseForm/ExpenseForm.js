@@ -68,13 +68,13 @@ export default function ExpenseForm() {
             }
 
             dispatch({type : "ADD_EXPENSE" , payload : {...values , mainCategoryName } })
-
+            alert.success("Expense Added")
             console.log(values);
         },
       });
 
     return (
-        <div className="income-form-component">
+        <div className="expense-form-component">
             <form action="" onSubmit={formik.handleSubmit} autoComplete="off">
 
             <div className="form-col mb-3">

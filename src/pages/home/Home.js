@@ -1,6 +1,7 @@
 import React from 'react'
 import CategoryList from '../../components/categoryList/CategoryList'
 import NewTransaction from '../../components/newTransaction/NewTransaction'
+import RecentTransaction from '../../components/recentTransaction/RecentTransaction'
 import './Home.css'
 export default function Home() {
     return (
@@ -20,6 +21,9 @@ export default function Home() {
                     </section>
                     <section className="transactions">
                         <NewTransaction/>
+                    </section>
+                    <section className="recent-transactions">
+                        <RecentTransaction />
                     </section>
                 </section>
                 
