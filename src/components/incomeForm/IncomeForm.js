@@ -27,7 +27,7 @@ export default function IncomeForm() {
         initialValues: {
           to: '',
           subCategory : '',
-          tags: 'none',
+          tags: '',
           amount: '',
           note : ''
         },
