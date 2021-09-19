@@ -51,7 +51,7 @@ export default function IncomeForm() {
             .max(30, 'Must be 30 characters or less')
 
         }),
-        onSubmit: values => {
+        onSubmit: ( values , {resetForm} ) => {
 
             const state = store.getState()
             
@@ -72,6 +72,7 @@ export default function IncomeForm() {
             dispatch({type : 'ADD_INCOME' , payload: values})
             alert.success("Income Added")
             console.log(values);
+            resetForm()
         },
       });
 
@@ -91,7 +92,7 @@ export default function IncomeForm() {
                     {...formik.getFieldProps('amount')}/>
                     <input list="subCategory" type="text" placeholder="Add a sub category ?" className="w-100" {...formik.getFieldProps('subCategory')}/>
                     <datalist id="subCategory">
-                       
+                       {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
                     </datalist>
                 </div>
                 <div className="errors">
@@ -120,7 +121,7 @@ export default function IncomeForm() {
                 <div className="form-col-inner">
                     <input type="text" placeholder="Note" 
                     {...formik.getFieldProps('note')}/>
-                    <button type="submit" className="btn btn-primary">Add Income</button>
+                    <button type="submit" className="btn btn-primary" >Add Income</button>
                 </div>
                 <div className="errors">
                     {formik.touched.note && formik.errors.note ? (<div>{formik.errors.note}</div>) : null}
