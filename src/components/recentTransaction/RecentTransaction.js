@@ -24,7 +24,7 @@ export default function RecentTransaction() {
                             <span>{el.to}</span>
                         </div>
                         <div className="amount d-block mt-2">
-                            <span className="d-inline d-sm-none me-2 ">Amount : </span>
+                            <span className="d-inline d-sm-none me-3 ">Amount : </span>
                             <span className={`${el.type === 'income' ? 'text-green' : 'text-danger' }`}>{el.amount} PKR</span>
                         </div>
                     </div>

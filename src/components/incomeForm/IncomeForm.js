@@ -71,7 +71,6 @@ export default function IncomeForm() {
             
             dispatch({type : 'ADD_INCOME' , payload: values})
             alert.success("Income Added")
-            console.log(values);
             resetForm()
         },
       });

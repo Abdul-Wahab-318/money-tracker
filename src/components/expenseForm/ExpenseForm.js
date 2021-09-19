@@ -43,7 +43,7 @@ export default function ExpenseForm() {
             .max(30, 'Must be 30 characters or less')
 
         }),
-        onSubmit: values => {
+        onSubmit: ( values , {resetForm} ) => {
             const state = store.getState().category.length
             if(state === 0) //IF NO CARTEGORY EXISTS
             {
@@ -69,7 +69,8 @@ export default function ExpenseForm() {
 
             dispatch({type : "ADD_EXPENSE" , payload : {...values , mainCategoryName } })
             alert.success("Expense Added")
-            console.log(values);
+            resetForm()
+
         },
       });
 

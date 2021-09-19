@@ -32,6 +32,16 @@
     font-size: 14px;
 }
 
+.amount .text-danger {
+    position: relative;
+}
+.amount .text-danger::before{
+    position: absolute;
+    left: -10px;
+    top: 0%;
+    content: '-';
+    color: var(--bs-danger);
+}
 @media (max-width : 576px) {
     .recent-trans-row .caption{
         flex-direction: column;
