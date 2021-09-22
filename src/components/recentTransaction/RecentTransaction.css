@@ -42,6 +42,13 @@
     content: '-';
     color: var(--bs-danger);
 }
+.to-bg{
+    border-radius: 6px;
+    padding: 5px 10px;
+    color: white;
+    background-color: var(--bs-dark);
+}
+
 @media (max-width : 576px) {
     .recent-trans-row .caption{
         flex-direction: column;

@@ -21,7 +21,7 @@ export default function RecentTransaction() {
                         <div>
                             <span>{el.from}</span>
                             <i className="bi bi-arrow-right-circle-fill mx-4"></i>
-                            <span>{el.to}</span>
+                            <span className="to-bg">{el.to}</span>
                         </div>
                         <div className="amount d-block mt-2">
                             <span className="d-inline d-sm-none me-3 ">Amount : </span>
