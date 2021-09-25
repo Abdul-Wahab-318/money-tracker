@@ -33,6 +33,13 @@
 }
 
 
+@media (min-width : 768px) and (max-width : 991.8px)
+{
+    .header-component{
+        padding: 12px 20px !important;
+    }
+}
+
 @media (max-width : 576px){
     .header-component{
         padding: 12px 15px;
