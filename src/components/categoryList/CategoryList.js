@@ -19,7 +19,7 @@ export default function CategoryList() {
                 { 
                 allCategories.length == 0 ? 
 
-                <div className="empty-list d-none d-sm-block">Add an Income</div> : allCategories.map( (el,ind) => <CategoryCard  key={ind} category={el} /> )}
+                <div className="empty-list ">Add an Income</div> : allCategories.map( (el,ind) => <CategoryCard  key={ind} category={el} /> )}
 
             </div>
         </main>

@@ -49,3 +49,13 @@ background: #888;
 .categories-list::-webkit-scrollbar-thumb:hover {
 background: #555;
 }
+
+@media (max-width : 576px){
+    .empty-list {
+        position: relative;
+        text-align: center;
+        font-size: 16px;
+        margin: 10px 0;
+        color: rgb(179, 176, 176);
+    }
+}

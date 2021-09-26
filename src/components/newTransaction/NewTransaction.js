@@ -2,6 +2,7 @@ import React from 'react'
 import './NewTransaction.css'
 import ExpenseForm from '../expenseForm/ExpenseForm'
 import IncomeForm from '../incomeForm/IncomeForm'
+import Transfer from '../transfer/Transfer'
 export default function NewTransaction() {
 
     let [activeTransaction , setActiveTransaction ] = React.useState("income")
@@ -17,7 +18,7 @@ export default function NewTransaction() {
                 return <ExpenseForm/>
             
             case "transfer" : 
-                return "Under Development ..."
+                return <Transfer/>
 
             case "income" :
                 return <IncomeForm/>

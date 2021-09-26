@@ -50,6 +50,12 @@
 }
 
 @media (max-width : 576px) {
+
+    .skeleton{
+        font-size: 16px;
+        margin: 10px 0;
+    } 
+
     .recent-trans-row .caption{
         flex-direction: column;
     }
