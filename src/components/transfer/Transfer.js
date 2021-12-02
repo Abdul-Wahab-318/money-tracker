@@ -19,6 +19,10 @@ export default function Transfer() {
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
     //JAVASCRIPT MONTHS START AT 0TH INDEX
 
+    let doesSubCategoryExist = (subCategory)=>{
+        return subCategoryTags.some( subCat => subCat.subCategory === subCategory )
+    } 
+
     const formik = useFormik({
         initialValues: {
           to: '',
@@ -34,7 +38,7 @@ export default function Transfer() {
             .min(3, "Must be 3 characters or less")
             .required('Category is required'),
 
-          to: Yup.string()
+          from: Yup.string()
           .max(20, 'Must be 20 characters or less')
           .min(3, "Must be 3 characters or less")
           .required('Category is required'),
@@ -43,37 +47,24 @@ export default function Transfer() {
             .max(20, 'Must be 20 characters or less')
             .required('Tags are Required'),
 
-          subCategory: Yup.string()
-          .max(20, 'Must be 20 characters or less')
-          .required("Sub Category is required"),
           
           amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
+
           note: Yup.string()
             .max(30, 'Must be 30 characters or less')
 
         }),
         onSubmit: ( values , {resetForm} ) => {
 
-            /*const state = store.getState()
-            
-            if(state.category.length === 0)
+            if(doesSubCategoryExist(values.from))
             {
-                dispatch({type : 'ADD_FIRST_INCOME' , payload: values})
-                alert.success("Income Added")
-                resetForm()
-                return 
+                console.log("AYYYYYY")
+                console.log("cough" , values)
+                dispatch({type : 'TRANSFER' , payload : values})
             }
-
-            if(isSameSubCategoryName(state.subCategoryTags , values.to , values.subCategory))
-            {
-                console.log("CATEGORY NAME DIFFERENT BUT SUB CAT SAME ")
-                alert.error("Sub category must be unique")
-                return
+            else{
+                console.log("nayy")
             }
-            
-            dispatch({type : 'ADD_INCOME' , payload: values})
-            alert.success("Income Added")
-            resetForm()*/
         },
       });
 
@@ -94,16 +85,17 @@ export default function Transfer() {
                                     <datalist id="from">
                                         {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
                                     </datalist>
+                                    
 
                                     <input type="number" placeholder = "Amount" 
                                     {...formik.getFieldProps('amount')}/>
 
                                     <div>
                                         <label htmlFor="">To</label>
-                                        <input list="subCategory" type="text" placeholder="Select a sub category" className="w-100" {...formik.getFieldProps('subCategory')}/>
+                                        <input list="to" type="text" placeholder="Select a sub category" className="w-100" {...formik.getFieldProps('to')}/>
                                     </div>
 
-                                    <datalist id="subCategory">
+                                    <datalist id="to">
                                     {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
                                     </datalist>
 

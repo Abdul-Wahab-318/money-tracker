@@ -241,6 +241,36 @@ export let budgetReducer = (state = initialState , action) => {
             
             }
 
+            
+
+        case 'TRANSFER' : 
+            
+            return{
+                ...state ,
+                category : [
+                    ...state.category.map( el => 
+                        {
+
+                            el.subCategory.map( subCat => 
+                                {
+                                  if( subCat.title == action.payload.from )
+                                  {
+                                      el.amount -= action.payload.amount
+                                      subCat.amount -= action.payload.amount
+                                  }  
+                                  return subCat
+                                } )
+
+                                return el
+                        }
+                    )
+                        ,
+                    
+
+
+                ]
+            }
+
 
         default : 
         return state
