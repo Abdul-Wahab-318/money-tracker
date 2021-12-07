@@ -253,20 +253,27 @@ export let budgetReducer = (state = initialState , action) => {
 
                             el.subCategory.map( subCat => 
                                 {
-                                  if( subCat.title == action.payload.from )
+                                    let shouldPaymentProceed = false 
+              
+                                  if( subCat.title == action.payload.from  && subCat.amount > action.payload.amount )
                                   {
                                       el.amount -= action.payload.amount
                                       subCat.amount -= action.payload.amount
+                                      shouldPaymentProceed = true
                                   }  
+
+                                  if( subCat.title == action.payload.to && shouldPaymentProceed )
+                                  {
+                                      el.amount += action.payload.amount 
+                                      subCat.amount += action.payload.amount
+                                  }
+
                                   return subCat
                                 } )
 
                                 return el
                         }
                     )
-                        ,
-                    
-
 
                 ]
             }
