@@ -58,9 +58,9 @@ export default function Transfer() {
 
             if(doesSubCategoryExist(values.from))
             {
-                console.log("AYYYYYY")
-                console.log("cough" , values)
                 dispatch({type : 'TRANSFER' , payload : values})
+                let budget = store.getState()
+                localStorage.setItem("budget" , JSON.stringify(budget) )
             }
             else{
                 console.log("nayy")

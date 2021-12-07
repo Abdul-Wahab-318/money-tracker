@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './IncomeForm.css'
 import { useDispatch , useSelector} from 'react-redux';
 import {store} from '../../redux/store' 
@@ -53,11 +53,13 @@ export default function IncomeForm() {
         }),
         onSubmit: ( values , {resetForm} ) => {
 
-            const state = store.getState()
+            let state = store.getState()
             
             if(state.category.length === 0)
             {
                 dispatch({type : 'ADD_FIRST_INCOME' , payload: values})
+                state = store.getState()
+                localStorage.setItem("budget" , JSON.stringify(state) )
                 alert.success("Income Added")
                 resetForm()
                 return 
@@ -71,6 +73,8 @@ export default function IncomeForm() {
             }
             
             dispatch({type : 'ADD_INCOME' , payload: values})
+            state = store.getState()
+            localStorage.setItem("budget" , JSON.stringify(state) )
             alert.success("Income Added")
             resetForm()
         },

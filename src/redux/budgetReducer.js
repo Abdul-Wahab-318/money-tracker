@@ -9,6 +9,7 @@ let initialState = {
     transfers : [] 
 }
 
+let initialBudget = localStorage.getItem("budget") ? JSON.parse( localStorage.getItem("budget") ) : initialState 
 
 let isSameCategory = (state , action)=>{
 
@@ -88,7 +89,7 @@ let updateCategory = (category , state , action)=>{
 }
 
 
-export let budgetReducer = (state = initialState , action) => {
+export let budgetReducer = (state = initialBudget , action) => {
 
     switch(action.type){
 
