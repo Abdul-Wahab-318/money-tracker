@@ -69,7 +69,7 @@ export default function ExpenseForm() {
 
             let budget = store.getState()
 
-            dispatch({type : "ADD_EXPENSE" , payload : {...values , mainCategoryName } })
+            dispatch({type : "ADD_EXPENSE" , payload : {...values , from : values.from.trim(), mainCategoryName } })
             localStorage.setItem("budget" , JSON.stringify(budget))
             alert.success("Expense Added")
             resetForm()

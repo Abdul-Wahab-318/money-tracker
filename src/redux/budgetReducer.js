@@ -245,7 +245,7 @@ export let budgetReducer = (state = initialBudget , action) => {
             
 
         case 'TRANSFER' : 
-            
+        let shouldPaymentProceed = false 
             return{
                 ...state ,
                 category : [
@@ -254,9 +254,9 @@ export let budgetReducer = (state = initialBudget , action) => {
 
                             el.subCategory.map( subCat => 
                                 {
-                                    let shouldPaymentProceed = false 
+                                    
               
-                                  if( subCat.title == action.payload.from  && subCat.amount > action.payload.amount )
+                                  if( subCat.title == action.payload.from  && subCat.amount >= action.payload.amount )
                                   {
                                       el.amount -= action.payload.amount
                                       subCat.amount -= action.payload.amount
@@ -279,6 +279,8 @@ export let budgetReducer = (state = initialBudget , action) => {
                 ]
             }
 
+        case 'RESET' :
+            return initialState 
 
         default : 
         return state
