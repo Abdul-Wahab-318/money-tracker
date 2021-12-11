@@ -245,25 +245,27 @@ export let budgetReducer = (state = initialBudget , action) => {
             
 
         case 'TRANSFER' : 
-        let shouldPaymentProceed = false 
+        
             return{
                 ...state ,
-                category : [
+                category : [    
                     ...state.category.map( el => 
                         {
-
+                            //this should have a bug but it doesnt ¯\_(ツ)_/¯
                             el.subCategory.map( subCat => 
                                 {
-                                    
+                                    if( subCat.title == action.payload.from  && subCat.amount < action.payload.amount )
+                                    {
+                                        throw "Transfer amount exceeds category amount"
+                                    }
               
-                                  if( subCat.title == action.payload.from  && subCat.amount >= action.payload.amount )
+                                  else if( subCat.title == action.payload.from  && subCat.amount >= action.payload.amount )
                                   {
                                       el.amount -= action.payload.amount
                                       subCat.amount -= action.payload.amount
-                                      shouldPaymentProceed = true
                                   }  
 
-                                  if( subCat.title == action.payload.to && shouldPaymentProceed )
+                                  else if ( subCat.title == action.payload.to )
                                   {
                                       el.amount += action.payload.amount 
                                       subCat.amount += action.payload.amount
