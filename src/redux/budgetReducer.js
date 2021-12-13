@@ -6,13 +6,12 @@ let initialState = {
     subCategoryTags : [],
     expenseTags : [] ,
     transactions : [],
-    monthlyIncome : [] , 
-    monthlyExpense : [] , 
+    monthlyIncome : new Array(12).fill(0) , 
+    monthlyExpense : new Array(12).fill(0) , 
     transfers : [] 
 }
 
-initialState.monthlyIncome.fill(0 , 0 , 12) //initialize array with 0
-initialState.monthlyExpense.fill(0 , 0 , 12) //initialize array with 0
+
 
 let initialBudget = localStorage.getItem("budget") ? JSON.parse( localStorage.getItem("budget") ) : initialState 
 

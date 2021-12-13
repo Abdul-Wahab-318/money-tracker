@@ -39,8 +39,6 @@ export default function Analytics() {
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
     let monthlyIncome = store.getState().monthlyIncome 
-    console.log(typeof(monthlyIncome))
-
     let monthlyExpense = store.getState().monthlyExpense 
 
     const data = {
@@ -48,13 +46,13 @@ export default function Analytics() {
     datasets: [
         {
         label : "Monthly Income",  
-        data : [...monthlyIncome] , 
+        data : monthlyIncome , 
         backgroundColor: 'rgba(33, 186, 69, 0.5)',
         } ,
 
         {
         label : "Monthly Expenses",  
-        data : [...monthlyExpense] , 
+        data : monthlyExpense , 
         backgroundColor: 'rgba(255, 0, 0, 0.6)',
         }
     ],
