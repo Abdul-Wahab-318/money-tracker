@@ -6,8 +6,11 @@ let initialState = {
     subCategoryTags : [],
     expenseTags : [] ,
     transactions : [],
+    monthlyIncome : new Array(12) , 
     transfers : [] 
 }
+
+initialState.monthlyIncome.fill(0 , 0 , 12) //initialize array with 0
 
 let initialBudget = localStorage.getItem("budget") ? JSON.parse( localStorage.getItem("budget") ) : initialState 
 
@@ -89,11 +92,13 @@ let updateCategory = (category , state , action)=>{
 }
 
 
+
 export let budgetReducer = (state = initialBudget , action) => {
 
     switch(action.type){
 
         case "ADD_FIRST_INCOME" :
+            state.monthlyIncome[ new Date().getMonth()] += action.payload.amount
             return {
                 ...state ,
                 category : [ 
@@ -123,7 +128,8 @@ export let budgetReducer = (state = initialBudget , action) => {
                 ],
                 subCategoryTags : [ {subCategory : action.payload.subCategory , mainCategory : action.payload.to } ],
                 incomeTags : [action.payload.tags] ,
-                categoryTags : [...state.categoryTags , action.payload.to]
+                categoryTags : [...state.categoryTags , action.payload.to],
+                
 
             
             }
@@ -132,7 +138,7 @@ export let budgetReducer = (state = initialBudget , action) => {
         case 'ADD_INCOME' :
 
             let isSameCat = isSameCategory(state , action)
-            
+            state.monthlyIncome[ new Date().getMonth()] += action.payload.amount
             if(isSameCat)    /// IF CATEGORY EXISTS
             {
                 return {
@@ -278,6 +284,17 @@ export let budgetReducer = (state = initialBudget , action) => {
                         }
                     )
 
+                ],
+                transactions : [
+                    ...state.transactions , 
+                    {
+                        id : Math.random().toString(36).slice(2,10),
+                        type : 'transfer',
+                        to : action.payload.to ,
+                        from: action.payload.from ,
+                        amount : action.payload.amount,
+                        date : new Date().toDateString()
+                    }
                 ]
             }
 

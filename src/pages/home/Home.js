@@ -1,9 +1,13 @@
-import React from 'react'
+import React  , {useState} from 'react'
 import CategoryList from '../../components/categoryList/CategoryList'
 import NewTransaction from '../../components/newTransaction/NewTransaction'
 import RecentTransaction from '../../components/recentTransaction/RecentTransaction'
+
 import './Home.css'
 export default function Home() {
+      
+
+      
     return (
         <div className="home-component">
             <main className="UI-parent custom-container">
@@ -25,6 +29,9 @@ export default function Home() {
                     <section className="recent-transactions">
                         <RecentTransaction />
                     </section>
+                </section>
+
+                <section className="mt-5 " >
                 </section>
                 
             </main>

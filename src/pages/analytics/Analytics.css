@@ -1,0 +1,10 @@
+.analytics-component {
+    background-color: rgb(246, 244, 244);
+    padding-bottom: 100px;
+}
+.analytics-chart{
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+
+}
