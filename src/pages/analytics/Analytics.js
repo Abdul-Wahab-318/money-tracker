@@ -38,8 +38,10 @@ export default function Analytics() {
       
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
-    let monthlyIncome = store.getState().monthlyIncome ;
+    let monthlyIncome = store.getState().monthlyIncome 
     console.log(monthlyIncome)
+
+    let monthlyExpense = store.getState().monthlyExpense 
 
     const data = {
     labels,
@@ -52,7 +54,7 @@ export default function Analytics() {
 
         {
         label : "Monthly Expenses",  
-        data : [122 , 434 , 900 , 670 , 1 , 100 , 1000 , 400 , 800] , 
+        data : [...monthlyExpense] , 
         backgroundColor: 'rgba(255, 0, 0, 0.6)',
         }
     ],

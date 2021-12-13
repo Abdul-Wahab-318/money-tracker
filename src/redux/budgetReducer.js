@@ -7,10 +7,12 @@ let initialState = {
     expenseTags : [] ,
     transactions : [],
     monthlyIncome : new Array(12) , 
+    monthlyExpense : new Array(12) , 
     transfers : [] 
 }
 
 initialState.monthlyIncome.fill(0 , 0 , 12) //initialize array with 0
+initialState.monthlyExpense.fill(0 , 0 , 12) //initialize array with 0
 
 let initialBudget = localStorage.getItem("budget") ? JSON.parse( localStorage.getItem("budget") ) : initialState 
 
@@ -211,7 +213,8 @@ export let budgetReducer = (state = initialBudget , action) => {
         
         case "ADD_EXPENSE" :
 
-            
+            state.monthlyExpense[ new Date().getMonth() ] += action.payload.amount
+
             let { mainCategoryName } = action.payload
             let toBeUpdated = state.category.find(el=> el.title === mainCategoryName)
             toBeUpdated.amount -= action.payload.amount
