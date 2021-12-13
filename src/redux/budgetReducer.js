@@ -6,8 +6,8 @@ let initialState = {
     subCategoryTags : [],
     expenseTags : [] ,
     transactions : [],
-    monthlyIncome : new Array(12) , 
-    monthlyExpense : new Array(12) , 
+    monthlyIncome : [] , 
+    monthlyExpense : [] , 
     transfers : [] 
 }
 

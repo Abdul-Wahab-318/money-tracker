@@ -39,7 +39,7 @@ export default function Analytics() {
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
     let monthlyIncome = store.getState().monthlyIncome 
-    console.log(monthlyIncome)
+    console.log(typeof(monthlyIncome))
 
     let monthlyExpense = store.getState().monthlyExpense 
 
