@@ -15,3 +15,15 @@
     background-color: white;
     width: 800px;
 }
+
+@media (max-width : 1812px) {
+    .analytics-chart{
+        width: unset;
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+    }
+}
