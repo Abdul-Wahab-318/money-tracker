@@ -3,7 +3,7 @@
     padding-bottom: 100px;
 }
 .analytics-chart{
-    width: 1800px;
+    padding: 0 100px;
     gap: 40px;
     display: flex;
     justify-content: center;
@@ -17,6 +17,12 @@
 }
 
 @media (max-width : 1812px) {
+    .analytics-chart > div {
+        padding: 40px;
+        border-radius: 20px;
+        background-color: white;
+        width: unset;
+    }
     .analytics-chart{
         width: unset;
         gap: 20px;
@@ -25,5 +31,11 @@
         justify-content: center;
         align-items: center;
         padding: 0 20px;
+    }
+}
+@media (max-width : 700px)
+{
+    .analytics-chart > div {
+        width: 100%;
     }
 }
