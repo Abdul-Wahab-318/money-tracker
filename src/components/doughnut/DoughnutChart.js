@@ -12,31 +12,27 @@ export default function DoughnutChart() {
         return subCat.subCategory.map( el => el.amount)
     }) ;
 
-    console.log(subCatAmount)
+    let subCatTitle = store.getState().category.map( subCat => {
+        return subCat.subCategory.map( el => el.title)
+    }) ;
+
+    let randomBg = () => {
+        return `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 132, 0.3)` // generate random number between 0 and 255
+    }
 
     ChartJS.register(ArcElement, Tooltip, Legend)
-    
+    let randomBgColors = subCatTitle.flat().map( el => randomBg()  )
     const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: [...subCatTitle.flat()],
         datasets: [
             {
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [...subCatAmount.flat()],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
+                    ...randomBgColors  
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
+                    ...randomBgColors
                 ],
                 borderWidth: 1,
             },

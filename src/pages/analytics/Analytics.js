@@ -42,22 +42,27 @@ export default function Analytics() {
     let monthlyIncome = store.getState().monthlyIncome 
     let monthlyExpense = store.getState().monthlyExpense 
 
-    const data = {
+    const incomeData = {
     labels,
     datasets: [
         {
         label : "Monthly Income",  
         data : monthlyIncome , 
         backgroundColor: 'rgba(33, 186, 69, 0.5)',
-        } ,
-
-        {
-        label : "Monthly Expenses",  
-        data : monthlyExpense , 
-        backgroundColor: 'rgba(255, 0, 0, 0.6)',
-        }
+        } 
     ],
-    };
+    }
+
+    const expenseData = {
+        labels,
+        datasets: [
+            {
+            label : "Monthly Expenses",  
+            data : monthlyExpense , 
+            backgroundColor: 'rgba(255, 0, 0, 0.6)',
+            }
+        ],
+        }
     
 
 
@@ -70,8 +75,8 @@ export default function Analytics() {
         
             <section className="analytics-chart monthly ">
                 <div>
-                    <Bar  data={data} />
-                    <Bar  data={data} className='mt-5'/>
+                    <Bar  data={incomeData} />
+                    <Bar  data={expenseData} className='mt-5'/>
                 </div>
                 <div>
                     <DoughnutChart/>
