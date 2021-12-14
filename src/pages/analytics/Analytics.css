@@ -3,8 +3,15 @@
     padding-bottom: 100px;
 }
 .analytics-chart{
+    width: 1800px;
+    gap: 40px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.analytics-chart > div {
     padding: 40px;
     border-radius: 20px;
     background-color: white;
-
+    width: 800px;
 }

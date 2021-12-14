@@ -13,6 +13,7 @@ import {
   } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import './Analytics.css'
+import DoughnutChart from '../../components/doughnut/DoughnutChart';
 
 export default function Analytics() {
 
@@ -67,8 +68,14 @@ export default function Analytics() {
             <h3>Dangerous !</h3>
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset Jojo Part 6 style </button>
         
-            <section className="analytics-chart monthly container">
-                <Bar  data={data} />
+            <section className="analytics-chart monthly ">
+                <div>
+                    <Bar  data={data} />
+                    <Bar  data={data} className='mt-5'/>
+                </div>
+                <div>
+                    <DoughnutChart/>
+                </div>
             </section>
 
 
