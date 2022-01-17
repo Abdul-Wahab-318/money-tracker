@@ -15,6 +15,8 @@ import { Bar } from 'react-chartjs-2';
 import './Analytics.css'
 import DoughnutChart from '../../components/doughnut/DoughnutChart';
 
+
+
 export default function Analytics() {
 
 
@@ -53,13 +55,19 @@ export default function Analytics() {
     ],
     }
 
-    const expenseData = {
+    const incomeExpenseData = {
         labels,
         datasets: [
             {
-            label : "Monthly Expenses",  
-            data : monthlyExpense , 
-            backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                label : "Monthly Income",  
+                data : monthlyIncome , 
+                backgroundColor: 'rgba(33, 186, 69, 0.5)',
+            } 
+            ,
+            {
+                label : "Monthly Expenses",  
+                data : monthlyExpense , 
+                backgroundColor: 'rgba(255, 0, 0, 0.6)',
             }
         ],
         }
@@ -68,22 +76,52 @@ export default function Analytics() {
 
 
     return (
-        <div className="analytics-component">
-            <h1>UNDER DEVELOPMENT ... </h1>
-            <h3>Dangerous !</h3>
+        <div className="analytics-component py-5">
+
+            <div className="analytics-component-inner">
+
+                <section className="left">
+
+                    <div className="imp-info">
+                        <div className="imp-info-card">
+                            <span>Number of sales</span>
+                            <p>1452</p>
+                            <div>
+                                <span className="percent-green me-2">
+                                    2 . 4% 
+                                </span>
+                                <span>
+                                    From previous period
+                                </span>
+                            </div>
+                        </div>
+                        <div className="imp-info-card"></div>
+                        <div className="imp-info-card"></div>
+                    </div>
+
+                    <section className="analytics-chart monthly ">
+                        <div className="analytics-inner">
+                            <div>
+                                <Bar  data={incomeExpenseData}/>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <section className="right">
+                    <section className="analytics-chart monthly ">
+                        <div className="analytics-inner">
+                            <div style={{height : "100%"}}>
+                                <DoughnutChart/>
+                            </div>
+                        </div>
+                </section>
+                </section>
+
+            </div>
+
+
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset Jojo Part 6 style </button>
-        
-            <section className="analytics-chart monthly ">
-                <div>
-                    <Bar  data={incomeData} />
-                    <Bar  data={expenseData} className='mt-5'/>
-                </div>
-                <div>
-                    <DoughnutChart/>
-                </div>
-            </section>
-
-
         </div>
     )
 }

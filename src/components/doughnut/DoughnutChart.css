@@ -1,0 +1,11 @@
+.doughnut-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.doughnut-component div {
+    width: 330px;
+}
+.doughnut-component canvas {
+    display: inline !important  ;
+}

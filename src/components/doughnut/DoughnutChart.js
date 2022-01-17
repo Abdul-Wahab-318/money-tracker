@@ -41,8 +41,12 @@ export default function DoughnutChart() {
     
     
     return (
-        <div className='doughnut-component'>
-            <Doughnut data={data} />
+        <div className='doughnut-component pb-2' >
+            <div className="text-center">
+                <p className='pb-1s'>Analytics</p>
+                <Doughnut data={data} />
+
+            </div>
         </div>
     )
 }

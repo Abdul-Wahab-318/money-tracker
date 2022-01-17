@@ -1,19 +1,73 @@
 .analytics-component {
     background-color: rgb(246, 244, 244);
     padding-bottom: 100px;
+    
 }
-.analytics-chart{
-    padding: 0 100px;
-    gap: 40px;
-    display: flex;
-    justify-content: center;
+.analytics-component-inner{
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    flex-wrap: wrap;
 }
-.analytics-chart > div {
+.imp-info{
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    gap: 40px;
+    margin-block-end: 40px;
+}
+.imp-info-card {
+    padding: 20px ;
+    border-radius: 15px;
+    background-color: white;
+}
+.imp-info-card span{
+    font-size: 14px;
+    color: rgb(73, 73, 73) ;
+}
+
+.imp-info-card p {
+    font-size: 22px;
+    margin: 8px 0 16px 0 ;
+} 
+.imp-info-card div {
+    padding: 15px 0 0  0 ;
+    border-top: 1px solid rgb(236, 234, 234);
+    display: flex;
+    align-items: center;
+}
+.imp-info-card .percent-green {
+    background-color: rgba(28,187,140,.18);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    color: var(--green-money);
+}
+.imp-info-card div span {
+    font-size: 13px;
+}
+
+.left {
+    padding-right: 20px;
+}
+
+.right
+{
+    padding-left: 20px;
+}
+.analytics-chart .analytics-inner > div {
+    width: 100%;
     padding: 40px;
     border-radius: 20px;
     background-color: white;
-    width: 800px;
+    
+}
+.analytics-chart .analytics-inner{
+    background-color: transparent;
+
 }
 
 @media (max-width : 1812px) {
