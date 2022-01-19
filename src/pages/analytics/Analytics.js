@@ -14,11 +14,11 @@ import {
 import { Bar } from 'react-chartjs-2';
 import './Analytics.css'
 import DoughnutChart from '../../components/doughnut/DoughnutChart';
+import MonthlyReport from '../../components/monthlyReport/MonthlyReport';
 
 
 
 export default function Analytics() {
-
 
     const dispatch = useDispatch()
     let resetBudget = () => {
@@ -95,8 +95,30 @@ export default function Analytics() {
                                 </span>
                             </div>
                         </div>
-                        <div className="imp-info-card"></div>
-                        <div className="imp-info-card"></div>
+                        <div className="imp-info-card">
+                            <span>Number of sales</span>
+                                <p>1452</p>
+                                <div>
+                                    <span className="percent-green me-2">
+                                        2 . 4% 
+                                    </span>
+                                    <span>
+                                        From previous period
+                                    </span>
+                                </div>
+                            </div>
+                        <div className="imp-info-card">
+                            <span>Number of sales</span>
+                                <p>1452</p>
+                                <div>
+                                    <span className="percent-green me-2">
+                                        2 . 4% 
+                                    </span>
+                                    <span>
+                                        From previous period
+                                    </span>
+                                </div>
+                            </div>
                     </div>
 
                     <section className="analytics-chart monthly ">
@@ -115,7 +137,10 @@ export default function Analytics() {
                                 <DoughnutChart/>
                             </div>
                         </div>
-                </section>
+                    </section>
+                    <section className='monthly-report'>
+                        <MonthlyReport/>
+                    </section>
                 </section>
 
             </div>
