@@ -9,3 +9,10 @@
 .doughnut-component canvas {
     display: inline !important  ;
 }
+
+@media (max-width : 576px)
+{
+    .doughnut-component div {
+        width: 250px;
+    }
+}

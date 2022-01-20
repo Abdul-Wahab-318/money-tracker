@@ -117,6 +117,16 @@
     .analytics-chart .analytics-inner > div {
         padding: 18px;
     }
+    .analytics-chart:last-child  .analytics-inner {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .analytics-chart:last-child  .analytics-inner> div {
+        padding: 20px ;
+        height: 400px;
+        width: 100%;
+  
+    }
     .right{
         padding : 0 ;
         margin-top: 40px;

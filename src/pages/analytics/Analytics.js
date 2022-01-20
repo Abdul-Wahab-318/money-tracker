@@ -36,9 +36,12 @@ export default function Analytics() {
         Tooltip,
         Legend
       );
-      
 
-      
+    let options = { maintainAspectRatio : true } 
+
+    if ( window.innerWidth <= 576 )
+    options.maintainAspectRatio = false  
+
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
     let monthlyIncome = store.getState().monthlyIncome 
@@ -124,7 +127,7 @@ export default function Analytics() {
                     <section className="analytics-chart monthly ">
                         <div className="analytics-inner">
                             <div>
-                                <Bar  data={incomeExpenseData}/>
+                                <Bar  data={incomeExpenseData} options={options}/>
                             </div>
                         </div>
                     </section>
