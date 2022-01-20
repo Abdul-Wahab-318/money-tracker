@@ -65,10 +65,14 @@
     background-color: white;
     
 }
+.analytics-chart:first-child  .analytics-inner> div {
+    padding: 20px 0 20px 0 ;
+}
 .analytics-chart .analytics-inner{
     background-color: transparent;
 
 }
+
 
 @media (max-width : 1812px) {
     .analytics-chart > div {

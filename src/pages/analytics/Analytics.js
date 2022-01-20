@@ -133,7 +133,7 @@ export default function Analytics() {
                 <section className="right">
                     <section className="analytics-chart monthly ">
                         <div className="analytics-inner">
-                            <div style={{height : "100%"}}>
+                            <div>
                                 <DoughnutChart/>
                             </div>
                         </div>

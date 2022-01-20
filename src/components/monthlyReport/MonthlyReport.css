@@ -1,3 +1,55 @@
+.monthly-report-component{
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 40px;
+    padding: 20px;
+}
 .report-chart {
-    width: 100px;
+    position: relative;
+    text-align: center;
+}
+.percent-up-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -5px);
+    background-color: rgba(28,187,140,.18);
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green-money);
+    display: flex;
+    align-items: center;
+}
+.percent-down-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -5px);
+    background-color: rgba(255,61,96,.18);
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bs-danger);
+    display: flex;
+    align-items: center;
+}
+.chart-container {
+    width: 110px;
+    margin: 0 auto 10px auto;
+    position: relative;
+}
+.report-chart span {
+    font-size: 13px;
+}
+.report-chart p {
+    margin-bottom: 0;
+}
+.report-parent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
