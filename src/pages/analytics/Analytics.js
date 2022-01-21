@@ -35,7 +35,7 @@ export default function Analytics() {
         Title,
         Tooltip,
         Legend
-      );
+      );    
 
     let options = { maintainAspectRatio : true } 
 

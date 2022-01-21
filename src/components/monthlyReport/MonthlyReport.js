@@ -25,6 +25,9 @@ export default function MonthlyReport() {
     {
         let loss = false
 
+        if ( prev == 0 )
+        return [0 , loss]
+
         let DecimalChange = current / prev  
 
         if ( DecimalChange < 1 ) // if there is loss
