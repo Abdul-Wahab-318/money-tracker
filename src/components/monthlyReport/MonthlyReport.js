@@ -6,20 +6,7 @@ import { store } from '../../redux/store';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-export default function MonthlyReport() {
-
-    const date = new Date()
-    let prevMonth
-
-    function getPrevMonth () 
-    {
-        prevMonth = date.getMonth() - 1 ;
-
-        if( prevMonth < 0 )
-        prevMonth = 11 ; 
-    }
-
-    getPrevMonth()
+export default function MonthlyReport(props) {
 
     function getPercentChange ( current , prev )
     {
@@ -45,20 +32,12 @@ export default function MonthlyReport() {
     }
 
     // EARNING INFO
-    let monthlyEarnings = store.getState().monthlyIncome
-    
-    let currentMonthEarning = monthlyEarnings[ date.getMonth() ] 
-    
-    let prevMonthEarning = monthlyEarnings [ prevMonth ]
+    let [currentMonthEarning , prevMonthEarning ] = props.earnings
 
     let [ earningPercentChange , earningLoss ] = getPercentChange( currentMonthEarning , prevMonthEarning )
 
     // EXPENSE INFO
-    let monthlyExpense = store.getState().monthlyExpense 
-
-    let currentMonthExpense = monthlyExpense [ date.getMonth() ]
-
-    let prevMonthExpense = monthlyExpense [ prevMonth ]
+    let [currentMonthExpense, prevMonthExpense ] = props.expense
 
     let [ expensePercentChange , expenseLoss ] = getPercentChange( currentMonthExpense , prevMonthExpense )
 

@@ -19,6 +19,10 @@ import MonthlyReport from '../../components/monthlyReport/MonthlyReport';
 
 
 export default function Analytics() {
+    
+    let prevMonth
+    const date = new Date()
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
     const dispatch = useDispatch()
     let resetBudget = () => {
@@ -26,7 +30,6 @@ export default function Analytics() {
         localStorage.removeItem("budget")
 
     }
-
 
     ChartJS.register(
         CategoryScale,
@@ -36,34 +39,53 @@ export default function Analytics() {
         Tooltip,
         Legend
       );    
-
     let options = { maintainAspectRatio : true } 
 
     if ( window.innerWidth <= 576 )
     options.maintainAspectRatio = false  
 
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
-    let monthlyIncome = store.getState().monthlyIncome 
-    let monthlyExpense = store.getState().monthlyExpense 
+    function getPrevMonth () 
+    {
+        prevMonth = date.getMonth() - 1 ;
 
-    const incomeData = {
-    labels,
-    datasets: [
-        {
-        label : "Monthly Income",  
-        data : monthlyIncome , 
-        backgroundColor: 'rgba(33, 186, 69, 0.5)',
-        } 
-    ],
+        if( prevMonth < 0 )
+        prevMonth = 11 ; 
     }
+
+    getPrevMonth()
+    /*let monthlyIncome = store.getState().monthlyIncome 
+    let monthlyExpense = store.getState().monthlyExpense 
+    let currentMonthProfit = monthlyIncome[ date.getMonth() ] - monthlyExpense[ date.getMonth() ]
+    console.log(currentMonthProfit)*/
+
+    // EARNING INFO
+    let monthlyEarnings = store.getState().monthlyIncome
+
+    let currentMonthEarning = monthlyEarnings[ date.getMonth() ] 
+    
+    let prevMonthEarning = monthlyEarnings [ prevMonth ]
+
+    
+    
+    // EXPENSE INFO
+    let monthlyExpense = store.getState().monthlyExpense 
+    
+    let currentMonthExpense = monthlyExpense [ date.getMonth() ]
+    
+    let prevMonthExpense = monthlyExpense [ prevMonth ]
+    
+    // Profit of current month
+    let currentMonthProfit = currentMonthEarning - currentMonthExpense
+
+
 
     const incomeExpenseData = {
         labels,
         datasets: [
             {
                 label : "Monthly Income",  
-                data : monthlyIncome , 
+                data : monthlyEarnings , 
                 backgroundColor: 'rgba(33, 186, 69, 0.5)',
             } 
             ,
@@ -73,7 +95,7 @@ export default function Analytics() {
                 backgroundColor: 'rgba(255, 0, 0, 0.6)',
             }
         ],
-        }
+    }
     
 
 
@@ -87,8 +109,8 @@ export default function Analytics() {
 
                     <div className="imp-info">
                         <div className="imp-info-card">
-                            <span>Number of sales</span>
-                            <p>1452</p>
+                            <span>Monthly Profit</span>
+                            <p>$ {currentMonthProfit}</p>
                             <div>
                                 <span className="percent-green me-2">
                                     2 . 4% 
@@ -142,7 +164,7 @@ export default function Analytics() {
                         </div>
                     </section>
                     <section className='monthly-report'>
-                        <MonthlyReport/>
+                        <MonthlyReport earnings = {[currentMonthEarning , prevMonthEarning]} expense = {[currentMonthExpense , prevMonthExpense]}/>
                     </section>
                 </section>
 
