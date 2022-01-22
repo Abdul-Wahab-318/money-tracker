@@ -159,7 +159,7 @@ export default function Analytics() {
         return false
     }
 
-    let dataExists = doesDataExist()
+    let dataExists = monthlyExpense.some( el => el != 0 )
     
 
     const incomeExpenseData = {
