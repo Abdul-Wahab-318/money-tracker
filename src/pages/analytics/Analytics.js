@@ -245,7 +245,7 @@ export default function Analytics() {
                         </div>
                     </section>
                     <section className='monthly-report'>
-                        <MonthlyReport earnings = {[currentMonthEarning , prevMonthEarning]} expense = {[currentMonthExpense , prevMonthExpense]}/>
+                    {dataExists ? <MonthlyReport/> : <></>}
                     </section>
                 </section>
 
