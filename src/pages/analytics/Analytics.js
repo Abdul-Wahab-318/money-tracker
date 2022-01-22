@@ -150,17 +150,8 @@ export default function Analytics() {
     let popularSubcategory = getPopularSubcategory( popularCategory.index )
     
     // checks if there is any data in redux
-    
-    let doesDataExist = () => {
-        for ( let data of monthlyExpense )
-        if( data != 0 )
-        return true
 
-        return false
-    }
-
-    let dataExists = monthlyExpense.some( el => el != 0 )
-    
+    let dataExists = monthlyEarnings.some( el => el != 0 )
 
     const incomeExpenseData = {
         labels,
@@ -245,7 +236,7 @@ export default function Analytics() {
                         </div>
                     </section>
                     <section className='monthly-report'>
-                    {dataExists ? <MonthlyReport/> : <></>}
+                    {dataExists ? <MonthlyReport earnings = {[currentMonthEarning , prevMonthEarning]} expense = {[currentMonthExpense , prevMonthExpense]} /> : <></>}
                     </section>
                 </section>
 
