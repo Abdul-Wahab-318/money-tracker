@@ -40,29 +40,32 @@ export default function Analytics() {
         Tooltip,
         Legend
       );    
+
+    // does not maintain aspect ratio for smaller screens
     let options = { maintainAspectRatio : true } 
 
     if ( window.innerWidth <= 576 )
     options.maintainAspectRatio = false  
 
-
+    
+    
     function getPrevMonth () 
     {
         prevMonth = date.getMonth() - 1 ;
-
+        
         if( prevMonth < 0 )
         prevMonth = 11 ; 
     }
-
+    
     getPrevMonth()
-
+    
     // EARNING INFO
     let monthlyEarnings = store.getState().monthlyIncome
-
+    
     let currentMonthEarning = monthlyEarnings[ date.getMonth() ] 
     
     let prevMonthEarning = monthlyEarnings [ prevMonth ]
-
+    
     
     
     // EXPENSE INFO
@@ -77,34 +80,34 @@ export default function Analytics() {
     
     // Profit of previous month 
     let prevMonthProfit = prevMonthEarning - prevMonthExpense 
-
+    
     function getPercentChange ( current , prev )
     {
         let loss = false
-
+        
         if ( prev == 0 )
         return [0 , loss]
-
+        
         let DecimalChange = current / prev  
-
+        
         if ( DecimalChange < 1 ) // if there is loss
         {
             loss = true 
             DecimalChange = 1 - DecimalChange ; 
-
+            
         }
-
+        
         else // if there is profit
         DecimalChange-- 
         
         return [Math.floor( Math.abs( DecimalChange * 100 ) ) , loss]
-
+        
     }
-
+    
     let [ profitPercentChange , loss ] = getPercentChange( currentMonthProfit , prevMonthProfit )
-
+    
     let categories = store.getState().category
-
+    
     // returns object containing most popular category
     let getPopularCategory = ( ) => {
         let highest = { amount : 0 }
@@ -123,14 +126,14 @@ export default function Analytics() {
         
         return { title : highest.title , amount : highest.amount , index : popularIndex } 
     }
-
+    
     let popularCategory  = getPopularCategory()  
     
     // returns object containing most popular sub category
     let getPopularSubcategory = ( index ) => {
-
+        
         let highest = { amount : 0 } 
-
+        if(categories[ index ])
         for ( let subCat of categories[ index ].subCategory )
         {
             if ( highest.amount < subCat.amount )
@@ -138,13 +141,26 @@ export default function Analytics() {
                 highest.title = subCat.title 
                 highest.amount = subCat.amount
             }
-
+            
         }
-
+        
         return {title : highest.title , amount : highest.amount }
     }
-
+    
     let popularSubcategory = getPopularSubcategory( popularCategory.index )
+    
+    // checks if there is any data in redux
+    
+    let doesDataExist = () => {
+        for ( let data of monthlyExpense )
+        if( data != 0 )
+        return true
+
+        return false
+    }
+
+    let dataExists = doesDataExist()
+    
 
     const incomeExpenseData = {
         labels,
@@ -163,9 +179,9 @@ export default function Analytics() {
         ],
     }
     
-
-
-
+    
+    
+    
     return (
         <div className="analytics-component py-5">
 
@@ -187,7 +203,7 @@ export default function Analytics() {
                         </div>
                         <div className="imp-info-card">
                             <span>Most popular category</span>
-                                <p>{popularCategory.title}</p>
+                                <p>{popularCategory.title ? popularCategory.title : "None"}</p>
                                 <div>
                                     <span>
                                         Amount : 
@@ -199,7 +215,7 @@ export default function Analytics() {
                             </div>
                         <div className="imp-info-card">
                             <span>Most popular subcategory</span>
-                                <p>{popularSubcategory.title}</p>
+                                <p>{popularSubcategory.title ? popularSubcategory.title : "None"}</p>
                                 <div>
                                     <span>
                                         Amount : 
@@ -223,8 +239,8 @@ export default function Analytics() {
                 <section className="right">
                     <section className="analytics-chart monthly ">
                         <div className="analytics-inner">
-                            <div>
-                                <DoughnutChart/>
+                            <div className='text-center'>
+                                {dataExists ? <DoughnutChart/> : <div> <p>Analytics</p> <p>No Data Found</p> </div>}
                             </div>
                         </div>
                     </section>
