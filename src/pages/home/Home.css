@@ -50,13 +50,24 @@
         grid-template-columns: 1fr;
 
     }
+    .categories-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+    }
     .recent-transactions {
         grid-column:  unset ;
     }
 }
 
+@media (min-width : 576px) and (max-width : 767.8px)
+{
+    .UI-main {
+        display: flex;
+        flex-direction: column;
+    }
+}
 
-@media (max-width : 576px){
+@media (max-width : 575.8px){
     .intro {
         padding: 20px 20px;
         border-radius: 20px;

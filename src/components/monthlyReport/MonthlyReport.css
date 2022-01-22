@@ -19,7 +19,7 @@
     margin: 0;
     font-size: 12px;
     font-weight: 500;
-    color: var(--green-money);
+    color: var(--green-money) !important;
     display: flex;
     align-items: center;
 }
@@ -34,7 +34,7 @@
     margin: 0;
     font-size: 12px;
     font-weight: 500;
-    color: var(--bs-danger);
+    color: var(--bs-danger) !important;
     display: flex;
     align-items: center;
 }

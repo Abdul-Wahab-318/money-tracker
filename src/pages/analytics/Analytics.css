@@ -39,6 +39,13 @@
     display: flex;
     align-items: center;
 }
+.imp-info-card div :is( .percent-down-badge , .percent-up-badge)
+{
+    position: relative;
+    transform: unset;
+    inset: unset;
+    font-size: 10px;
+}
 .imp-info-card .percent-green {
     background-color: rgba(28,187,140,.18);
     padding: 3px 8px;
@@ -73,32 +80,67 @@
 
 }
 
-/*
-@media (max-width : 1812px) {
-    .analytics-chart > div {
-        padding: 40px;
-        border-radius: 20px;
-        background-color: white;
-        width: unset;
-    }
-    .analytics-chart{
-        width: unset;
-        gap: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0 20px;
-    }
-}*/
-/*@media (max-width : 700px)
+@media (min-width : 992px) and (max-width : 1200px)
 {
-    .analytics-chart > div {
-        width: 100%;
+    .imp-info {
+        grid-template-columns: 1fr 1fr;
+        
     }
-}*/
+    .imp-info .imp-info-card:last-child {
+        display : none ;
+    }
+}
 
-@media (max-width : 576px)
+
+@media (min-width : 767.8px) and (max-width : 991.8px)
+{
+    .analytics-component-inner {
+        grid-template-columns: 1fr ;
+    }
+    .left , .right {
+        padding: 0;
+    }
+    .right {
+        margin-top: 20px;
+    }
+    .imp-info {
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    .monthly-report-component {
+        margin-top: 20px !important;
+ 
+    }
+}
+
+@media (min-width : 576px) and (max-width : 767px)
+{
+    .analytics-component-inner {
+        grid-template-columns: 1fr ;
+    }
+    .left , .right {
+        padding: 0;
+    }
+    .right {
+        margin-top: 20px;
+    }
+    .imp-info {
+        gap: 20px;
+        margin-bottom: 20px;
+        grid-template-columns: 1fr 1fr;
+    }
+    .imp-info .imp-info-card:last-child {
+        grid-column: span 2;
+        width: 50%;
+        margin: 0 auto;
+    }
+    .monthly-report-component {
+        margin-top: 20px !important;
+ 
+    }
+}
+
+@media (max-width : 575.8px)
 {
     .analytics-component-inner{
         display: grid;

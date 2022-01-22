@@ -10,6 +10,15 @@
     display: inline !important  ;
 }
 
+
+@media (min-width : 991.8px) and (max-width : 1200px)
+{
+    .doughnut-component div {
+        width: 290px;
+    }
+}
+
+
 @media (max-width : 576px)
 {
     .doughnut-component div {

@@ -15,7 +15,8 @@ import { Bar } from 'react-chartjs-2';
 import './Analytics.css'
 import DoughnutChart from '../../components/doughnut/DoughnutChart';
 import MonthlyReport from '../../components/monthlyReport/MonthlyReport';
-
+import { VscTriangleUp } from 'react-icons/vsc';
+import { VscTriangleDown } from 'react-icons/vsc';
 
 
 export default function Analytics() {
@@ -54,10 +55,6 @@ export default function Analytics() {
     }
 
     getPrevMonth()
-    /*let monthlyIncome = store.getState().monthlyIncome 
-    let monthlyExpense = store.getState().monthlyExpense 
-    let currentMonthProfit = monthlyIncome[ date.getMonth() ] - monthlyExpense[ date.getMonth() ]
-    console.log(currentMonthProfit)*/
 
     // EARNING INFO
     let monthlyEarnings = store.getState().monthlyIncome
@@ -75,10 +72,79 @@ export default function Analytics() {
     
     let prevMonthExpense = monthlyExpense [ prevMonth ]
     
-    // Profit of current month
+    // Profit and expense of current month
     let currentMonthProfit = currentMonthEarning - currentMonthExpense
+    
+    // Profit of previous month 
+    let prevMonthProfit = prevMonthEarning - prevMonthExpense 
 
+    function getPercentChange ( current , prev )
+    {
+        let loss = false
 
+        if ( prev == 0 )
+        return [0 , loss]
+
+        let DecimalChange = current / prev  
+
+        if ( DecimalChange < 1 ) // if there is loss
+        {
+            loss = true 
+            DecimalChange = 1 - DecimalChange ; 
+
+        }
+
+        else // if there is profit
+        DecimalChange-- 
+        
+        return [Math.floor( Math.abs( DecimalChange * 100 ) ) , loss]
+
+    }
+
+    let [ profitPercentChange , loss ] = getPercentChange( currentMonthProfit , prevMonthProfit )
+
+    let categories = store.getState().category
+
+    // returns object containing most popular category
+    let getPopularCategory = ( ) => {
+        let highest = { amount : 0 }
+        let popularIndex = 0 
+        let index = 0 
+        for ( let cat of categories )
+        {
+            if ( highest.amount < cat.amount )
+            {
+                highest.amount = cat.amount 
+                highest.title = cat.title
+                popularIndex = index
+            }
+            index++ ; 
+        }
+        
+        return { title : highest.title , amount : highest.amount , index : popularIndex } 
+    }
+
+    let popularCategory  = getPopularCategory()  
+    
+    // returns object containing most popular sub category
+    let getPopularSubcategory = ( index ) => {
+
+        let highest = { amount : 0 } 
+
+        for ( let subCat of categories[ index ].subCategory )
+        {
+            if ( highest.amount < subCat.amount )
+            {
+                highest.title = subCat.title 
+                highest.amount = subCat.amount
+            }
+
+        }
+
+        return {title : highest.title , amount : highest.amount }
+    }
+
+    let popularSubcategory = getPopularSubcategory( popularCategory.index )
 
     const incomeExpenseData = {
         labels,
@@ -112,35 +178,34 @@ export default function Analytics() {
                             <span>Monthly Profit</span>
                             <p>$ {currentMonthProfit}</p>
                             <div>
-                                <span className="percent-green me-2">
-                                    2 . 4% 
-                                </span>
-                                <span>
+                            {loss ? <span className="percent-down-badge"> <VscTriangleDown/> { profitPercentChange}%</span> 
+                            : <span className="percent-up-badge"> <VscTriangleUp/> { profitPercentChange}%</span>}
+                                <span className='ps-2'>
                                     From previous period
                                 </span>
                             </div>
                         </div>
                         <div className="imp-info-card">
-                            <span>Number of sales</span>
-                                <p>1452</p>
+                            <span>Most popular category</span>
+                                <p>{popularCategory.title}</p>
                                 <div>
-                                    <span className="percent-green me-2">
-                                        2 . 4% 
-                                    </span>
                                     <span>
-                                        From previous period
+                                        Amount : 
+                                    </span>
+                                    <span className="percent-green ms-2">
+                                        $ {popularCategory.amount}
                                     </span>
                                 </div>
                             </div>
                         <div className="imp-info-card">
-                            <span>Number of sales</span>
-                                <p>1452</p>
+                            <span>Most popular subcategory</span>
+                                <p>{popularSubcategory.title}</p>
                                 <div>
-                                    <span className="percent-green me-2">
-                                        2 . 4% 
-                                    </span>
                                     <span>
-                                        From previous period
+                                        Amount : 
+                                    </span>
+                                    <span className="percent-green ms-2">
+                                        $ {popularSubcategory.amount}
                                     </span>
                                 </div>
                             </div>
