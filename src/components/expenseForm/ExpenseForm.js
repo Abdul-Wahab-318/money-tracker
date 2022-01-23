@@ -12,7 +12,7 @@ export default function ExpenseForm() {
     const alert = useAlert()
 
     //const categoryTags =   [ ...new Set(useSelector( state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
-    const subCategoryTags = useSelector(state=> state.subCategoryTags.map( el =>  el.subCategory ))
+    const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`

@@ -12,7 +12,7 @@ export default function Transfer() {
     const dispatch = useDispatch()
 
     const categoryTags = useSelector(state => state.categoryTags)
-    const subCategoryTags = useSelector(state => state.subCategoryTags)
+    const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
     const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
 
     let date = new Date()
@@ -94,7 +94,7 @@ export default function Transfer() {
                                     <input list="from" type="text" placeholder="Select a sub category"
                                     {...formik.getFieldProps('from')} />
                                     <datalist id="from">
-                                        {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
+                                        {subCategoryTags.map((el,ind)=> <option key={ind} >{el}</option>)}
                                     </datalist>
                                     
 
@@ -107,7 +107,7 @@ export default function Transfer() {
                                     </div>
 
                                     <datalist id="to">
-                                    {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
+                                    {subCategoryTags.map((el,ind)=> <option key={ind} >{el}</option>)}
                                     </datalist>
 
                                 </div>
