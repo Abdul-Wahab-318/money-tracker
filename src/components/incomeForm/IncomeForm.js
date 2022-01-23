@@ -13,6 +13,7 @@ export default function IncomeForm() {
 
     const categoryTags = useSelector(state => state.categoryTags)
     const subCategoryTags = useSelector(state => state.subCategoryTags)
+    console.log( `subCategory tags : ${subCategoryTags}`)
     const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
 
     let date = new Date()
@@ -65,6 +66,12 @@ export default function IncomeForm() {
                 return 
             }
 
+            if( values.subCategory == values.to )
+            {
+                alert.error("Main category and subcategory name cannot be same")
+                return 
+            }
+
             if(isSameSubCategoryName(state.subCategoryTags , values.to , values.subCategory))
             {
                 console.log("CATEGORY NAME DIFFERENT BUT SUB CAT SAME ")
@@ -96,7 +103,7 @@ export default function IncomeForm() {
                     {...formik.getFieldProps('amount')}/>
                     <input list="subCategory" type="text" placeholder="Add a sub category ?" className="w-100" {...formik.getFieldProps('subCategory')}/>
                     <datalist id="subCategory">
-                       {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
+                       {subCategoryTags.map((el,ind)=> <option key={ind} >{el}</option>)}
                     </datalist>
                 </div>
                 <div className="errors">
