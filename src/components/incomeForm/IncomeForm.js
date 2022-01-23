@@ -12,8 +12,8 @@ export default function IncomeForm() {
     const dispatch = useDispatch()
 
     const categoryTags = useSelector(state => state.categoryTags)
-    const subCategoryTags = useSelector(state => state.subCategoryTags)
-    console.log( `subCategory tags : ${subCategoryTags}`)
+    const subCategoryTags = [ ...new Set(useSelector(state => state.subCategoryTags)) ] 
+
     const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
 
     let date = new Date()
@@ -103,7 +103,7 @@ export default function IncomeForm() {
                     {...formik.getFieldProps('amount')}/>
                     <input list="subCategory" type="text" placeholder="Add a sub category ?" className="w-100" {...formik.getFieldProps('subCategory')}/>
                     <datalist id="subCategory">
-                       {subCategoryTags.map((el,ind)=> <option key={ind} >{el}</option>)}
+                       {subCategoryTags.map((el,ind)=> <option key={ind} >{el.subCategory}</option>)}
                     </datalist>
                 </div>
                 <div className="errors">

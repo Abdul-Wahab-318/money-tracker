@@ -127,12 +127,7 @@ export let budgetReducer = (state = initialBudget , action) => {
                         date : new Date().toDateString()
                     }   
                 ],
-                subCategoryTags : [...new Set( 
-                    [
-                        ...state.subCategoryTags ,
-                        action.payload.subCategory 
-                    ] 
-                    )],
+                subCategoryTags : [ {subCategory : action.payload.subCategory , mainCategory : action.payload.to } ],
                 incomeTags : [action.payload.tags] ,
                 categoryTags : [...state.categoryTags , action.payload.to],
                 
@@ -167,7 +162,7 @@ export let budgetReducer = (state = initialBudget , action) => {
                     subCategoryTags : [...new Set( 
                         [
                             ...state.subCategoryTags ,
-                            action.payload.subCategory
+                            {subCategory : action.payload.subCategory , mainCategory : action.payload.to}
                         ] 
                         )],
 
@@ -207,7 +202,7 @@ export let budgetReducer = (state = initialBudget , action) => {
                 subCategoryTags : [...new Set( 
                     [
                         ...state.subCategoryTags ,
-                        action.payload.subCategory
+                        {subCategory : action.payload.subCategory , mainCategory : action.payload.to}
                     ] 
                     )],
                 categoryTags : [...new Set( [...state.categoryTags , action.payload.to] )],
