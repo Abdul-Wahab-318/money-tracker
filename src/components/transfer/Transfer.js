@@ -13,6 +13,7 @@ export default function Transfer() {
 
     const categoryTags = useSelector(state => state.categoryTags)
     const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
+    console.log(subCategoryTags)
     const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
 
     let date = new Date()
@@ -20,9 +21,8 @@ export default function Transfer() {
     //JAVASCRIPT MONTHS START AT 0TH INDEX
 
     let doesSubCategoryExist = (subCategory)=>{
-        return subCategoryTags.some( subCat => subCat.subCategory === subCategory )
+        return subCategoryTags.some( subCat => subCat === subCategory )
     } 
-
     const formik = useFormik({
         initialValues: {
           to: '',
@@ -55,7 +55,7 @@ export default function Transfer() {
 
         }),
         onSubmit: ( values , {resetForm} ) => {
-
+            console.log("fucking ")
             if(doesSubCategoryExist(values.from))
             {
                 try{
@@ -79,7 +79,7 @@ export default function Transfer() {
         },
       });
 
-
+      console.log(formik.errors)
 
 
 
@@ -137,7 +137,7 @@ export default function Transfer() {
                                 <div className="form-col-inner">
                                     <input type="text" placeholder="Note" 
                                     {...formik.getFieldProps('note')}/>
-                                    <button type="submit" className="btn btn-primary" >Add Income</button>
+                                    <button type="submit" className="btn btn-primary" >Transfer</button>
                                 </div>
                                 <div className="errors">
                                     {formik.touched.note && formik.errors.note ? (<div>{formik.errors.note}</div>) : null}
