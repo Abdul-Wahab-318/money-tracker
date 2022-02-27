@@ -55,16 +55,7 @@ export default function IncomeForm() {
         onSubmit: ( values , {resetForm} ) => {
 
             let state = store.getState()
-            
-            if(state.category.length === 0)
-            {
-                dispatch({type : 'ADD_FIRST_INCOME' , payload: {...values , to : values.to.trim() , subCategory : values.subCategory.trim() } })
-                state = store.getState()
-                localStorage.setItem("budget" , JSON.stringify(state) )
-                alert.success("Income Added")
-                resetForm()
-                return 
-            }
+
 
             if( values.subCategory == values.to )
             {

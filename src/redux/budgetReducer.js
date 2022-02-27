@@ -98,44 +98,6 @@ export let budgetReducer = (state = initialBudget , action) => {
 
     switch(action.type){
 
-        case "ADD_FIRST_INCOME" :
-            state.monthlyIncome[ new Date().getMonth()] += action.payload.amount
-            return {
-                ...state ,
-                category : [ 
-                    {
-                        title: action.payload.to ,
-                        amount: action.payload.amount,
-                        subCategory : [ 
-                            {
-                                title : action.payload.subCategory ,
-                                amount : action.payload.amount ,
-                                note : action.payload.note
-                            } 
-                        ]
-                        
-                    }
-
-                ],
-                transactions : [
-                    {
-                        id : Math.random().toString(36).slice(2,10),
-                        type : 'income',
-                        to : action.payload.subCategory ,
-                        from : action.payload.tags ,
-                        amount : action.payload.amount ,
-                        date : new Date().toDateString()
-                    }   
-                ],
-                subCategoryTags : [ {subCategory : action.payload.subCategory , mainCategory : action.payload.to } ],
-                incomeTags : [action.payload.tags] ,
-                categoryTags : [...state.categoryTags , action.payload.to],
-                
-
-            
-            }
-
-
         case 'ADD_INCOME' :
 
             let isSameCat = isSameCategory(state , action)
