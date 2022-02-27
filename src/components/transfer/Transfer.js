@@ -13,16 +13,16 @@ export default function Transfer() {
 
     const categoryTags = useSelector(state => state.categoryTags)
     const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
-    console.log(subCategoryTags)
     const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
     //JAVASCRIPT MONTHS START AT 0TH INDEX
 
-    let doesSubCategoryExist = (subCategory)=>{
-        return subCategoryTags.some( subCat => subCat === subCategory )
-    } 
+    let doesStringExist = ( string , arr ) => {
+        return arr.includes(string)
+    }
+    //console.log("Does it contain ? " , doesStringExist("primary" , subCategoryTags))
     const formik = useFormik({
         initialValues: {
           to: '',
@@ -35,12 +35,12 @@ export default function Transfer() {
 
           to: Yup.string()
             .max(20, 'Must be 20 characters or less')
-            .min(3, "Must be 3 characters or less")
+            .min(3, "Must be 3 characters or more")
             .required('Category is required'),
 
           from: Yup.string()
           .max(20, 'Must be 20 characters or less')
-          .min(3, "Must be 3 characters or less")
+          .min(3, "Must be 3 characters or more")
           .required('Category is required'),
 
           tags: Yup.string()
@@ -55,8 +55,8 @@ export default function Transfer() {
 
         }),
         onSubmit: ( values , {resetForm} ) => {
-            console.log("fucking ")
-            if(doesSubCategoryExist(values.from))
+            
+            if( doesStringExist( values.from , subCategoryTags ) && doesStringExist( values.to , subCategoryTags ) )
             {
                 try{
 
@@ -73,14 +73,12 @@ export default function Transfer() {
                     alert.error(err)
                 }
             }
-            else{
-                console.log("nayy")
+            else
+            {
+                alert.error("Category not found")
             }
         },
       });
-
-      console.log(formik.errors)
-
 
 
     return (
