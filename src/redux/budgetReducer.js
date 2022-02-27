@@ -8,7 +8,6 @@ let initialState = {
     transactions : [],
     monthlyIncome : new Array(12).fill(0) , 
     monthlyExpense : new Array(12).fill(0) , 
-    transfers : [] 
 }
 
 
@@ -19,21 +18,14 @@ let isSameCategory = (state , action)=>{
 
 
    let repeatedCat = state.category.find(el => el.title === action.payload.to)
-   console.log("FOUND REPEATED CATEGORY")
    if(!repeatedCat) return false
 
-   let updatedCat = updateCategory(repeatedCat ,state ,action)
+   let updatedCat = updateCategory(repeatedCat ,action)
 
    return updatedCat
 
 }
 
-let doesSubCategoryExist = (action)=>{
-    if( 'subCategory' in action.payload == false)  //IF NO SUB CATEGORY
-    return false
-
-    return true
-}
 
 let isSameSubCategory = ( repeatedCategory , action )=>{
 
@@ -44,49 +36,34 @@ let isSameSubCategory = ( repeatedCategory , action )=>{
 
 }
 
-let updateCategory = (category , state , action)=>{
+let updateCategory = (category , action)=>{
 
-    console.log("UPDATING CATEGORY")
-
-    if(doesSubCategoryExist(action)) // IF SUB CATEGORY EXISTS THEN CHECK IF IT IS SAME OR NEW
+    let sameSubCategory = isSameSubCategory(category , action)
+    if( sameSubCategory )   //SAME SUB CATEGORY
     {
-        console.log("SUB CATEGORY EXISTS")
-        let sameSubCategory = isSameSubCategory(category , action)
-        if( sameSubCategory )   //SAME SUB CATEGORY
-        {
-            //TAKE OUT ALL THE SUBCATEGORIES WHICH ARE NOT SAME AND ADD THE UPDATED SUB CATEGORY WHICH WAS SAME
-            return {
-                ...category ,
-                amount: category.amount + action.payload.amount,
-                subCategory : [
-                    ...category.subCategory.filter( subCat => subCat.title !== action.payload.subCategory ) ,
-                     {...sameSubCategory , amount : sameSubCategory.amount + action.payload.amount}
-                    ]  
-                }
-        }
-        else  // NEW SUB CATEGORY
-        {
-            return {
-                ...category ,
-                amount: category.amount + action.payload.amount,
-                subCategory : [
-                    ...category.subCategory ,
-                    {
-                        title : action.payload.subCategory,
-                        amount : action.payload.amount,
-                        note : action.payload.note
-                    }
-                ]
-            }
-        }
-
-    }
-
-    else  //NO SUB CATEGORY
-    {
-        return{
-            ...category,
+        //TAKE OUT ALL THE SUBCATEGORIES WHICH ARE NOT SAME AND ADD THE UPDATED SUB CATEGORY WHICH WAS SAME
+        return {
+            ...category ,
             amount: category.amount + action.payload.amount,
+            subCategory : [
+                ...category.subCategory.filter( subCat => subCat.title !== action.payload.subCategory ) ,
+                    {...sameSubCategory , amount : sameSubCategory.amount + action.payload.amount}
+                ]  
+            }
+    }
+    else  // NEW SUB CATEGORY
+    {
+        return {
+            ...category ,
+            amount: category.amount + action.payload.amount,
+            subCategory : [
+                ...category.subCategory ,
+                {
+                    title : action.payload.subCategory,
+                    amount : action.payload.amount,
+                    note : action.payload.note
+                }
+            ]
         }
     }
 
@@ -102,7 +79,7 @@ export let budgetReducer = (state = initialBudget , action) => {
 
             let isSameCat = isSameCategory(state , action)
             state.monthlyIncome[ new Date().getMonth()] += action.payload.amount
-            if(isSameCat)    /// IF CATEGORY EXISTS
+            if(isSameCat)    /// IF CATEGORY Already EXISTS
             {
                 return {
                     ...state,
@@ -192,7 +169,7 @@ export let budgetReducer = (state = initialBudget , action) => {
                                 el.amount -= action.payload.amount
                             }
                             return el
-                        })
+                        }).filter( el => el.amount !== 0)
                     }
                 ] ,
 
@@ -259,7 +236,8 @@ export let budgetReducer = (state = initialBudget , action) => {
                         amount : action.payload.amount,
                         date : new Date().toDateString()
                     }
-                ]
+                ],
+
             }
 
         case 'RESET' :
