@@ -13,6 +13,8 @@ export default function ExpenseForm() {
 
     //const categoryTags =   [ ...new Set(useSelector( state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
     const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
+    const expenseTags = [ ...new Set( useSelector(state => state.expenseTags) ) ] 
+    console.log(expenseTags)
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
@@ -67,9 +69,10 @@ export default function ExpenseForm() {
                 return
             }
 
-            let budget = store.getState()
-
+            
             dispatch({type : "ADD_EXPENSE" , payload : {...values , from : values.from.trim(), mainCategoryName } })
+            dispatch({ type : "CHECK" })
+            let budget = store.getState()
             localStorage.setItem("budget" , JSON.stringify(budget))
             alert.success("Expense Added")
             resetForm()
@@ -104,7 +107,7 @@ export default function ExpenseForm() {
                     <input list="tags" type="text" placeholder="Choose existing or add new" 
                     {...formik.getFieldProps('tags')}/>
                     <datalist id="tags" >
-              
+                        {expenseTags.map( ( tag , i ) => <option key = {i} value={tag} > {tag} </option>)}
                     </datalist>
                     <input type="text" disabled placeholder = {currentDate} />
                 </div>

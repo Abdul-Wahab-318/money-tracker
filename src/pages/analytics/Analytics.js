@@ -17,6 +17,7 @@ import DoughnutChart from '../../components/doughnut/DoughnutChart';
 import MonthlyReport from '../../components/monthlyReport/MonthlyReport';
 import { VscTriangleUp } from 'react-icons/vsc';
 import { VscTriangleDown } from 'react-icons/vsc';
+import ExpenseTags from '../../components/expenseTags/ExpenseTags';
 
 
 export default function Analytics() {
@@ -225,6 +226,11 @@ export default function Analytics() {
                             </div>
                         </div>
                     </section>
+
+                    <section className="tags">
+                        {/*<ExpenseTags/>*/}
+                    </section>
+
                 </section>
 
                 <section className="right">
@@ -244,6 +250,7 @@ export default function Analytics() {
 
 
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset Jojo Part 6 style </button>
+            <button className="btn btn-success m-5" onClick = {() => dispatch({type:"CHECK"})} > optimize health</button>
         </div>
     )
 }

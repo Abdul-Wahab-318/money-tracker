@@ -19,8 +19,8 @@ export default function Transfer() {
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
     //JAVASCRIPT MONTHS START AT 0TH INDEX
 
-    let doesStringExist = ( string , arr ) => {
-        return arr.includes(string)
+    let doesSubCatExist = ( title ) => {
+        return subCategoryTags.some( subCat => subCat === title )
     }
     //console.log("Does it contain ? " , doesStringExist("primary" , subCategoryTags))
     const formik = useFormik({
@@ -55,28 +55,34 @@ export default function Transfer() {
 
         }),
         onSubmit: ( values , {resetForm} ) => {
-            
-            if( doesStringExist( values.from , subCategoryTags ) && doesStringExist( values.to , subCategoryTags ) )
-            {
-                try{
 
-                    dispatch({type : 'TRANSFER' , payload : {...values , to: values.to.trim() , from : values.from.trim()}})
-                    alert.success("Transferred")
-                    let budget = store.getState()
-                    localStorage.setItem("budget" , JSON.stringify(budget) )
-    
-                    resetForm()
-                }
-                catch( err )
-                {
-                 
-                    alert.error(err)
-                }
+            if( values.from === values.to )
+            {
+                alert.error("cannot transfer to the same category") 
+                return
             }
-            else
+            
+            if( !(doesSubCatExist( values.from ) && doesSubCatExist( values.to )) )
             {
                 alert.error("Category not found")
+                return 
             }
+
+            try{
+
+                dispatch({type : 'TRANSFER' , payload : {...values , to: values.to.trim() , from : values.from.trim()}})
+                dispatch({ type : "CHECK" })    
+                alert.success("Transferred")
+                let budget = store.getState()
+                localStorage.setItem("budget" , JSON.stringify(budget) )
+
+                resetForm()
+            }
+            catch( err )
+            {
+                alert.error(err)
+            }
+
         },
       });
 

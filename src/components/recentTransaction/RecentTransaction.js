@@ -6,10 +6,9 @@ import { store } from '../../redux/store'
 
 export default function RecentTransaction() {
 
-    let recentEntries = useSelector(state => state.transactions).slice(-6 )
+    let recentEntries = useSelector(state => state.transactions).slice( -4 )
     console.log(recentEntries , "recent")
-    let arr=  [ 1 , 2 , 3 , 4, 5 , 6 ]
-    console.log(arr.slice(-2))
+
     return (
         <div className="recent-transaction-component">
             <h4 className="lead-text">Recent Transactions</h4>

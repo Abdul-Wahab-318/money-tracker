@@ -10,7 +10,7 @@ let initialState = {
     monthlyExpense : new Array(12).fill(0) , 
 }
 
-
+let removeSubCategory = "" // when a subcategory amount goes becomes 0 it gets assigned its name then we remove it from our state  
 
 let initialBudget = localStorage.getItem("budget") ? JSON.parse( localStorage.getItem("budget") ) : initialState 
 
@@ -169,7 +169,7 @@ export let budgetReducer = (state = initialBudget , action) => {
                                 el.amount -= action.payload.amount
                             }
                             return el
-                        }).filter( el => el.amount !== 0)
+                        })//.filter( el => el.amount !== 0)
                     }
                 ] ,
 
@@ -198,8 +198,7 @@ export let budgetReducer = (state = initialBudget , action) => {
                 category : [    
                     ...state.category.map( el => 
                         {
-                            //this should have a bug but it doesnt ¯\_(ツ)_/¯
-                            el.subCategory.map( subCat => 
+                            el.subCategory = el.subCategory.map( subCat => 
                                 {
                                     if( subCat.title == action.payload.from  && subCat.amount < action.payload.amount )
                                     {
@@ -219,7 +218,8 @@ export let budgetReducer = (state = initialBudget , action) => {
                                   }
 
                                   return subCat
-                                } )
+                                } 
+                                )//.filter( subCat => subCat.amount > 0 )
 
                                 return el
                         }
@@ -237,6 +237,31 @@ export let budgetReducer = (state = initialBudget , action) => {
                         date : new Date().toDateString()
                     }
                 ],
+
+            }
+
+        case 'CHECK' : 
+        console.log("___--CASE CHECK___--")
+            return {
+                ...state , 
+                category : state.category.map( category => {
+                    return {
+                        ...category ,
+                        subCategory : category.subCategory.filter( subCat => {
+                            
+                            if ( subCat.amount <= 0 )
+                            {
+                                removeSubCategory = subCat.title
+                                console.log("removeSubCat val : " , removeSubCategory)
+                            }
+                            else
+                            return subCat
+
+                        } ) 
+                    }
+                } ) , 
+
+                subCategoryTags : state.subCategoryTags.filter( tag => tag.subCategory !== removeSubCategory )
 
             }
 
