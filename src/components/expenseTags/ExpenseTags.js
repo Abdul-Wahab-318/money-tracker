@@ -25,13 +25,32 @@ export default function ExpenseTags() {
 
   console.log(expenseTags)
 
-  console.log(transactions)
+  console.log( [...expenseTags.values()])
 
+  let expenseTagKeys  = [...expenseTags.keys()]
   return (
     <section className="expense-tags">
         <div className="expense-tags-inner">
-            <h6>Expense Tags Statistics</h6>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam incidunt impedit velit blanditiis mollitia ipsum praesentium facilis quisquam eaque, harum adipisci necessitatibus aut quae nesciunt? Laboriosam ipsam dolor blanditiis quae.
+          <div className="section-heading">
+            <h6 className='mb-0'>Expense Tags Statistics</h6>
+          </div>
+            {/*{
+              [...expenseTags.values()].map( (tag , ind) => {
+                counter++ ; 
+                return <div key = {ind} > {expenseTagKeys[counter]} ${tag} </div>
+              })
+            }*/}
+            <div className="expense-tags-cards">
+              {
+                expenseTagKeys.map( ( key , ind ) => {
+                  return (
+                  <div className='imp-info-card' key = {ind} >
+                    <h6>{key}</h6>
+                    <p>${expenseTags.get(key)}</p>
+                  </div>)
+                })
+              }
+            </div>
         </div>
     </section>
   )

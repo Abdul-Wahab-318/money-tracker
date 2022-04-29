@@ -172,8 +172,6 @@ export default function Analytics() {
     }
     
     
-    
-    
     return (
         <div className="analytics-component py-5">
 
@@ -184,7 +182,7 @@ export default function Analytics() {
                     <div className="imp-info">
                         <div className="imp-info-card">
                             <span>Monthly Profit</span>
-                            <p>$ {currentMonthProfit}</p>
+                            {currentMonthProfit < 0 ? <p className='text-danger'>$ {currentMonthProfit}</p> : <p>$ {currentMonthProfit}</p>}
                             <div>
                             {loss ? <span className="percent-down-badge"> <VscTriangleDown/> { profitPercentChange}%</span> 
                             : <span className="percent-up-badge"> <VscTriangleUp/> { profitPercentChange}%</span>}
@@ -228,7 +226,7 @@ export default function Analytics() {
                     </section>
 
                     <section className="tags">
-                        {/*<ExpenseTags/>*/}
+                        <ExpenseTags/>
                     </section>
 
                 </section>
@@ -245,12 +243,12 @@ export default function Analytics() {
                     {dataExists ? <MonthlyReport earnings = {[currentMonthEarning , prevMonthEarning]} expense = {[currentMonthExpense , prevMonthExpense]} /> : <></>}
                     </section>
                 </section>
-
+            <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset  </button>
+            <button className="btn btn-success m-5" onClick = {() => dispatch({type:"CHECK"})} > optimize </button>
             </div>
+            <p className='text-center'>work in progress...</p>
 
 
-            <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset Jojo Part 6 style </button>
-            <button className="btn btn-success m-5" onClick = {() => dispatch({type:"CHECK"})} > optimize health</button>
         </div>
     )
 }
