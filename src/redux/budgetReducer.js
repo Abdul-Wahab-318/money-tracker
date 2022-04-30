@@ -241,7 +241,13 @@ export let budgetReducer = (state = initialBudget , action) => {
             }
 
         case 'CHECK' : 
-        console.log("___--CASE CHECK___--")
+
+        let newTransactions = state.transactions.map( el => {
+            if ( el.to == "Skincare")
+            el.to = "Skin care"
+
+            return el
+        })
             return {
                 ...state , 
                 category : state.category.map( category => {
@@ -261,8 +267,8 @@ export let budgetReducer = (state = initialBudget , action) => {
                     }
                 } ) , 
 
-                subCategoryTags : state.subCategoryTags.filter( tag => tag.subCategory !== removeSubCategory )
-
+                subCategoryTags : state.subCategoryTags.filter( tag => tag.subCategory !== removeSubCategory ) , 
+                transactions : newTransactions
             }
 
         case 'RESET' :
