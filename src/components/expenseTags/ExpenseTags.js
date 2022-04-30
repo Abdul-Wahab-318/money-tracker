@@ -6,7 +6,6 @@ import { store } from '../../redux/store'
 export default function ExpenseTags() {
 
   let transactions = store.getState().transactions
-  console.log("ttttt  " , transactions)
   let expenseTags = new Map()
 
   transactions.map( transaction => {
@@ -16,7 +15,6 @@ export default function ExpenseTags() {
     if( expenseTags.has(transaction.to))
     {
       expenseTags.set( transaction.to , expenseTags.get( transaction.to ) + transaction.amount )
-      //expenseTags[transaction.to] += transaction.amount
     }
     else
     {
@@ -25,9 +23,6 @@ export default function ExpenseTags() {
 
   })
 
-  console.log(expenseTags)
-
-  console.log( [...expenseTags.values()])
 
   let expenseTagKeys  = [...expenseTags.keys()]
   return (

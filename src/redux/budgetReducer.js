@@ -241,17 +241,6 @@ export let budgetReducer = (state = initialBudget , action) => {
             }
 
         case 'CHECK' : 
-
-        let newTransactions = state.transactions.map( el => {
-            if ( el.to == "Skincare")
-            {
-                el.to = "Skin care"
-                console.log("DEFECT___----")
-            }
-
-            return el
-        })
-        console.log("new transactions : " , newTransactions)
             return {
                 ...state , 
                 category : state.category.map( category => {
