@@ -12,7 +12,7 @@ export default function ExpenseTags() {
 
     if ( transaction.type === "income" || transaction.type === "transfer" ) return 
 
-    if( expenseTags.has(transaction))
+    if( expenseTags.has(transaction.to))
     {
       expenseTags[transaction.to] += transaction.amount
     }
