@@ -23,6 +23,7 @@ import ExpenseTags from '../../components/expenseTags/ExpenseTags';
 export default function Analytics() {
     
     let prevMonth
+    let state = store.getState()
     const date = new Date()
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
@@ -245,6 +246,7 @@ export default function Analytics() {
                 </section>
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset  </button>
             <button className="btn btn-success m-5" onClick = {() => dispatch({type:"CHECK"})} > optimize </button>
+            <button className="btn btn-success m-5" onClick = {() => navigator.clipboard.writeText(JSON.stringify(state))} > Copy data to clipboard </button>
             </div>
             <p className='text-center'>work in progress...</p>
 
