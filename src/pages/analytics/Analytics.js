@@ -245,7 +245,12 @@ export default function Analytics() {
                     </section>
                 </section>
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset  </button>
-            <button className="btn btn-success m-5" onClick = {() => dispatch({type:"CHECK"})} > optimize </button>
+            <button className="btn btn-success m-5" onClick = {() => { 
+                dispatch({type:"CHECK"})
+                let budget = store.getState()
+                localStorage.setItem("budget" , JSON.stringify(budget))
+            } 
+            }> optimize </button>
             <button className="btn btn-success m-5" onClick = {() => navigator.clipboard.writeText(JSON.stringify(state))} > Copy data to clipboard </button>
             </div>
             <p className='text-center'>work in progress...</p>
