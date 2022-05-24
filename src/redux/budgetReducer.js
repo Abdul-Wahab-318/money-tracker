@@ -189,8 +189,6 @@ export let budgetReducer = (state = initialBudget , action) => {
             
             }
 
-            
-
         case 'TRANSFER' : 
         
             return{
@@ -240,28 +238,10 @@ export let budgetReducer = (state = initialBudget , action) => {
 
             }
 
+        // will change this later
         case 'CHECK' : 
             return {
                 ...state , 
-                category : state.category.map( category => {
-                    return {
-                        ...category ,
-                        subCategory : category.subCategory.filter( subCat => {
-                            
-                            if ( subCat.amount <= 0 )
-                            {
-                                removeSubCategory = subCat.title
-                                console.log("removeSubCat val : " , removeSubCategory)
-                            }
-                            else
-                            return subCat
-
-                        } ) 
-                    }
-                } ) , 
-
-                subCategoryTags : state.subCategoryTags.filter( tag => tag.subCategory !== removeSubCategory ) , 
-                transactions : newTransactions
             }
 
         case 'RESET' :

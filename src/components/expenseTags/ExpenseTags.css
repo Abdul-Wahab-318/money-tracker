@@ -4,6 +4,17 @@
     border-radius: 20px;
     margin-top: 40px;
 }*/
+.imp-info-card h6 {
+    display: inline;
+    position: relative;
+}
+.expense-amount {
+    background-color: rgba(255,61,96,.18);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 500;
+    color: var(--bs-danger) !important;
+}
 .section-heading h6{
     display: inline-block;
     background-color: white;
