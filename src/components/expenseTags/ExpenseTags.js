@@ -29,15 +29,16 @@ export default function ExpenseTags() {
     <section className="expense-tags">
         <div className="expense-tags-inner">
           <div className="section-heading">
-            <h6 className='mb-0'>Expense Tags Statistics</h6>
+            <h6 className='mb-0'>Total Expense Per Tag</h6>
           </div>
             <div className="expense-tags-cards">
               {
                 expenseTagKeys.map( ( key , ind ) => {
                   return (
-                  <div className='imp-info-card' key = {ind} >
-                    <h6 className='percent-green fs-6'>{key}</h6>
-                    <p className='expense-amount'>${expenseTags.get(key)}</p>
+                  <div className='imp-info-card justify-content-between d-flex align-items-center' key = {ind} >
+                    <span className='percent-green fs-6 me-1'>{key} </span>
+                    <span> : </span>
+                    <span className='expense-amount fs-6 ms-1'>${expenseTags.get(key)}</span>
                   </div>)
                 })
               }

@@ -1,0 +1,22 @@
+.remove-tags-inner{
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 40px;
+}
+.expense-tag-field{
+    margin: 15px 0;
+    
+}
+.expense-tag-field  input {
+    border: none;
+    background-color: rgba(255,61,96,.18);
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    color: var(--bs-danger) !important;
+}
+.expense-tag-field  input:focus{
+    outline-offset: 4px;
+    outline: 2px solid var(--bs-danger);
+}
