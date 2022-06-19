@@ -67,22 +67,25 @@ export default function RemoveTags() {
         <div>
             <div className="remove-tags-inner">
                 <h6 className='mb-4'>Edit Expense Tags</h6>
-                { expenseTags.map( (el, ind) => 
-                <div className='expense-tag-field d-flex align-items-center' key={ind}> 
-                    <input type="text" value={el} id={ind} readOnly= {readOnly}
-                    className = {inputBG}
-                    onChange = { (e) => handleChange(e.target)}   />
-                    <div className=" ms-4 icons">
-                        { readOnly ? 
-                            <button className='p-2 btn ' onClick={()=> handleToggle()}><img src={edit} width={24} alt="" /></button>
-                            :
-                            <button className='p-2 btn ' onClick={()=> {handleToggle() ; handleEdit()} }>
-                                <img src={save} width={20} alt="" />
-                            </button>
-                        }
-                        <button className='p-2 ms-3 btn ' onClick = { () => deleteTag(el) }><img src={deleteIcon} width={25} alt="" /></button>
-                    </div>
-                </div> ) }
+                <div className="expense-tag-field-parent">
+                    { expenseTags.map( (el, ind) => 
+                    <div className='expense-tag-field d-flex align-items-center' key={ind}> 
+                        <input type="text" value={el} id={ind} readOnly= {readOnly}
+                        className = {inputBG}
+                        onChange = { (e) => handleChange(e.target)}   />
+                        <div className=" ms-4 icons">
+                            { readOnly ? 
+                                <button className='p-2 btn ' onClick={()=> handleToggle()}><img src={edit} width={24} alt="" /></button>
+                                :
+                                <button className='p-2 btn ' onClick={()=> {handleToggle() ; handleEdit()} }>
+                                    <img src={save} width={20} alt="" />
+                                </button>
+                            }
+                            <button className='p-2 ms-3 btn ' onClick = { () => deleteTag(el) }><img src={deleteIcon} width={25} alt="" /></button>
+                        </div>
+                    </div> ) }
+
+                </div>
             </div>
         </div>
     </section>
