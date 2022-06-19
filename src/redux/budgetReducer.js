@@ -244,6 +244,12 @@ export let budgetReducer = (state = initialBudget , action) => {
                 expenseTags : action.payload
             }
 
+        case 'DELETE_EXPENSE_TAGS' :
+            return  {
+                    ...state ,
+                    expenseTags : action.payload
+                }
+
         // will change this later
         case 'CHECK' : 
             return {

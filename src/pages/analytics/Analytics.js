@@ -18,7 +18,7 @@ import MonthlyReport from '../../components/monthlyReport/MonthlyReport';
 import { VscTriangleUp } from 'react-icons/vsc';
 import { VscTriangleDown } from 'react-icons/vsc';
 import ExpenseTags from '../../components/expenseTags/ExpenseTags';
-import RemoveTags from '../../components/removeTags/RemoveTags';
+import EditTags from "../../components/editTags/EditTags"
 
 
 export default function Analytics() {
@@ -245,7 +245,7 @@ export default function Analytics() {
                     {dataExists ? <MonthlyReport earnings = {[currentMonthEarning , prevMonthEarning]} expense = {[currentMonthExpense , prevMonthExpense]} /> : <></>}
                     </section>
                     <section className="remove-tags">
-                        {/*<RemoveTags />*/ }
+                        <EditTags />
                     </section>
                 </section>
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset  </button>
