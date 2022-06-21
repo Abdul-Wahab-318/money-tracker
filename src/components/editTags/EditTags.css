@@ -26,7 +26,7 @@
     .expense-tag-field-parent{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        gap: 20px;
     }
 
     .expense-tag-field-parent .expense-tag-field {

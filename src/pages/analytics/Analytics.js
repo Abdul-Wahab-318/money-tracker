@@ -222,7 +222,7 @@ export default function Analytics() {
                     <section className="analytics-chart monthly ">
                         <div className="analytics-inner">
                             <div>
-                                <Bar  data={incomeExpenseData} options={options}/>
+                               <Bar  data={incomeExpenseData} options={options}/>
                             </div>
                         </div>
                     </section>
