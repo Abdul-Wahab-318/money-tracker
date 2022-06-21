@@ -40,7 +40,7 @@
 {
     .expense-tag-field{
         display: grid !important;
-        grid-template-columns: 60% 40%;
+        grid-template-columns: 50% 50% ; 
     }
     .expense-tag-field .icons{
         margin-left: 10px !important;

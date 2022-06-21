@@ -245,7 +245,7 @@ export default function Analytics() {
                     {dataExists ? <MonthlyReport earnings = {[currentMonthEarning , prevMonthEarning]} expense = {[currentMonthExpense , prevMonthExpense]} /> : <></>}
                     </section>
                     <section className="remove-tags">
-                        {/*<EditTags />*/}
+                        <EditTags />
                     </section>
                 </section>
             <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset  </button>
