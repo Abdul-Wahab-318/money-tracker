@@ -81,7 +81,7 @@ export default function RemoveTags() {
                                     <img src={save} width={20} alt="" />
                                 </button>
                             }
-                            <button className='p-2 ms-3 btn ' onClick = { () => deleteTag(el) }><img src={deleteIcon} width={25} alt="" /></button>
+                            <button className='p-2 ms-2 btn ' onClick = { () => deleteTag(el) }><img src={deleteIcon} width={25} alt="" /></button>
                         </div>
                     </div> ) }
 
