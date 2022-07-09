@@ -1,13 +1,72 @@
-import React , { useEffect } from 'react'
+import React , { useState , useEffect } from 'react'
 import './ExpenseTags.css'
 
 import { store } from '../../redux/store'
 
 export default function ExpenseTags() {
 
-  let currentMonth = new Date().getMonth()  
+  let [currentMonth , setCurrentMonth ] = useState( new Date().getMonth() ) 
+  let monthOptions = [
+    {
+      value :0 ,
+      month : "January"
+    },
+    {
+      value :1 ,
+      month : "February"
+    },
+    {
+      value :2 ,
+      month : "March"
+    }
+    ,
+    {
+      value :3 ,
+      month : "April"
+    }
+    ,
+    {
+      value :4 ,
+      month : "May"
+    }
+    ,
+    {
+      value :5 ,
+      month : "June"
+    }
+    ,
+    {
+      value :6 ,
+      month : "July"
+    }
+    ,
+    {
+      value :7 ,
+      month : "August"
+    }
+    ,
+    {
+      value :8 ,
+      month : "September"
+    }
+    ,
+    {
+      value :9 ,
+      month : "October"
+    }
+    ,
+    {
+      value :10 ,
+      month : "November"
+    }
+    ,
+    {
+      value :11 ,
+      month : "December"
+    }
+  ] 
   let transactions = store.getState().transactions
-
+  console.log("currentMOnth : " , currentMonth)
   //TOTAL EXPENSE 
   let totalExpenseTags = new Map()
 
@@ -75,12 +134,17 @@ export default function ExpenseTags() {
     <section className="expense-tags">
         <div className="expense-tags-inner">
 
-        <section className="monthly-expenses">
-            <div className="section-heading">
-              <h6 className='mb-0'>Monthly Expense Per Tag</h6>
+        <section className="monthly-expenses mt-5">
+            <div className="section-heading d-flex align-items-center justify-content-between">
+              <h6 className='m-0'>Monthly Expense Per Tag</h6>
+              <select className='month-drop-box' name="selectedMonth" id="month" onChange={ ({target }) => setCurrentMonth(target.value)}>
+                {monthOptions.map( el => <option value={el.value}>{el.month}</option>)}
+              </select>
             </div>
               <div className="expense-tags-cards">
                 {
+                  monthlyExpenseKeys.length == 0 ? <p className='text-center'>No expenses for this month </p> :
+                  
                   monthlyExpenseKeys.map( ( el , ind ) => {
                     return (
                     <div className='imp-info-card justify-content-between d-flex align-items-center' key={el}> 

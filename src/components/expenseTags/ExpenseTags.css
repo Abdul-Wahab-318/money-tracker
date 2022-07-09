@@ -29,12 +29,26 @@
 .imp-info-card{
     box-sizing: border-box ; 
 }
+.month-drop-box{
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
+.month-drop-box:focus{
+    outline: 2px solid var(--bs-primary);
 
-
+}
 @media (max-width : 576px)
 {
     .expense-tags-cards{
         grid-template-columns:  repeat( auto-fill , 1fr);
+    }
+    .monthly-expenses .section-heading{
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .monthly-expenses .section-heading select{
+        margin-top: 10px;
     }
 }
 
