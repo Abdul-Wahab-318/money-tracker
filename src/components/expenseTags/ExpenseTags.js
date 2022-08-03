@@ -65,8 +65,7 @@ export default function ExpenseTags() {
       month : "December"
     }
   ] 
-  let transactions = store.getState().transactions
-  console.log("currentMOnth : " , currentMonth)
+  let transactions = store.getState().budgetReducer.transactions
   //TOTAL EXPENSE 
   let totalExpenseTags = new Map()
 
@@ -123,10 +122,6 @@ export default function ExpenseTags() {
 
   populateMonthlyTransactionsMap()
 
-
-  console.log( "Monthly expense are : " , [...monthlyExpenseMap.keys()])
-
-
   let monthlyExpenseKeys = [ ...monthlyExpenseMap.keys() ]
   let totalExpenseTagKeys  = [...totalExpenseTags.keys()]
 
@@ -137,8 +132,8 @@ export default function ExpenseTags() {
         <section className="monthly-expenses mt-5">
             <div className="section-heading d-flex align-items-center justify-content-between">
               <h6 className='m-0'>Monthly Expense Per Tag</h6>
-              <select className='month-drop-box' name="selectedMonth" id="month" onChange={ ({target }) => setCurrentMonth(target.value)}>
-                {monthOptions.map( el => <option value={el.value}>{el.month}</option>)}
+              <select className='month-drop-box' name="selectedMonth" id="month" value={currentMonth} onChange={ ({target }) => setCurrentMonth(target.value)}>
+                {monthOptions.map( el => <option value={el.value} key={el.value}>{el.month}</option>)}
               </select>
             </div>
               <div className="expense-tags-cards">
@@ -162,7 +157,7 @@ export default function ExpenseTags() {
               <h6 className='mb-0'>Total Expense Per Tag</h6>
             </div>
               <div className="expense-tags-cards">
-                {
+                { totalExpenseTagKeys.length !== 0 ?
                   totalExpenseTagKeys.map( ( key , ind ) => {
                     return (
                     <div className='imp-info-card justify-content-between d-flex align-items-center'  key={ind} >
@@ -171,6 +166,8 @@ export default function ExpenseTags() {
                       <span className='expense-amount fs-6 ms-1'>${totalExpenseTags.get(key)}</span>
                     </div>)
                   })
+                  :
+                  <p className='text-center'>No Expenses found</p>
                 }
               </div>
           </section>

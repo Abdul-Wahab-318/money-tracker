@@ -5,8 +5,7 @@ import CategoryCard from '../categoryCard/CategoryCard'
 
 export default function CategoryList() {
 
-    let allCategories  = useSelector(state=> state.category)
-    console.log(allCategories)
+    let allCategories  = useSelector(state=> state.budgetReducer.category)
     let netAmount = allCategories.reduce( (accum , val) => accum + val.amount , 0 )
 
     return (

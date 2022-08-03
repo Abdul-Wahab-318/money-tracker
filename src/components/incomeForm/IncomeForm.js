@@ -5,16 +5,17 @@ import {store} from '../../redux/store'
 import { useFormik } from 'formik';
 import {useAlert} from 'react-alert'
 import * as Yup from 'yup';
+import { updateBudget } from '../../api/api';
 
 export default function IncomeForm() {
 
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const categoryTags = useSelector(state => state.categoryTags)
-    const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
+    const categoryTags = useSelector(state => state.budgetReducer.categoryTags)
+    const subCategoryTags = [ ...new Set( useSelector(state => state.budgetReducer.subCategoryTags).map( el => el.subCategory) ) ]  
 
-    const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
+    const incomeTags =   [ ...new Set(useSelector(state => state.budgetReducer.incomeTags)) ]  
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
@@ -49,12 +50,12 @@ export default function IncomeForm() {
           
           amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
           note: Yup.string()
-            .max(30, 'Must be 30 characters or less')
+            .max(70, 'Must be 70 characters or less')
 
         }),
-        onSubmit: ( values , {resetForm} ) => {
+        onSubmit: async ( values , {resetForm} ) => {
 
-            let state = store.getState()
+            let state = store.getState().budgetReducer
 
 
             if( values.subCategory == values.to )
@@ -71,8 +72,11 @@ export default function IncomeForm() {
             }
             
             dispatch({type : 'ADD_INCOME' , payload: {...values , to : values.to.trim() , subCategory : values.subCategory.trim() } })
-            state = store.getState()
+            state = store.getState().budgetReducer
+            
+            await updateBudget( state )
             localStorage.setItem("budget" , JSON.stringify(state) )
+            
             alert.success("Income Added")
             resetForm()
         },

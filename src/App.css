@@ -19,3 +19,8 @@ html , body{
 .text-green{
     color: var(--green-money);
 }
+.box{
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}

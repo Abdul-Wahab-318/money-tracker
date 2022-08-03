@@ -4,6 +4,7 @@ import { useDispatch , useSelector} from 'react-redux';
 import {store} from '../../redux/store' 
 import { useFormik } from 'formik';
 import {useAlert} from 'react-alert'
+import { updateBudget } from '../../api/api';
 import * as Yup from 'yup';
 
 export default function ExpenseForm() {
@@ -11,10 +12,8 @@ export default function ExpenseForm() {
     const dispatch = useDispatch()
     const alert = useAlert()
 
-    //const categoryTags =   [ ...new Set(useSelector( state => state.categoryTags)) ]  //REMOVE REPEATED TAGS-
-    const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
-    const expenseTags = [ ...new Set( useSelector(state => state.expenseTags) ) ] 
-    console.log(expenseTags)
+    const subCategoryTags = [ ...new Set( useSelector(state => state.budgetReducer.subCategoryTags).map( el => el.subCategory) ) ]  
+    const expenseTags = [ ...new Set( useSelector(state => state.budgetReducer.expenseTags) ) ] 
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
@@ -42,12 +41,14 @@ export default function ExpenseForm() {
           
           amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
           note: Yup.string()
-            .max(30, 'Must be 30 characters or less')
+            .max(70, 'Must be 70 characters or less')
 
         }),
-        onSubmit: ( values , {resetForm} ) => {
-            const state = store.getState().category.length
-            if(state === 0) //IF NO CARTEGORY EXISTS
+        onSubmit: async  ( values , {resetForm} ) => {
+
+            let budgetState = store.getState().budgetReducer
+            const categories = store.getState().budgetReducer.category.length
+            if( categories === 0) //IF NO CARTEGORY EXISTS
             {
                 alert.error("Category not found")    
                 return
@@ -59,8 +60,8 @@ export default function ExpenseForm() {
                 return
             }
 
-            let mainCategoryName = store.getState().subCategoryTags.find( el => el.subCategory === values.from ).mainCategory
-            let mainCategory = store.getState().category.find( el => el.title === mainCategoryName )
+            let mainCategoryName = budgetState.subCategoryTags.find( el => el.subCategory === values.from ).mainCategory
+            let mainCategory = budgetState.category.find( el => el.title === mainCategoryName )
             let subCategoryAmount = mainCategory.subCategory.find( el => el.title === values.from ).amount
 
             if( subCategoryAmount < values.amount )
@@ -69,11 +70,18 @@ export default function ExpenseForm() {
                 return
             }
 
-            
+            try{
+
+            }catch( err )
+            {
+                
+            }
             dispatch({type : "ADD_EXPENSE" , payload : {...values , from : values.from.trim(), mainCategoryName } })
-            dispatch({ type : "CHECK" })
-            let budget = store.getState()
-            localStorage.setItem("budget" , JSON.stringify(budget))
+            budgetState = store.getState().budgetReducer
+
+            await updateBudget( budgetState )
+            
+            localStorage.setItem("budget" , JSON.stringify(budgetState))
             alert.success("Expense Added")
             resetForm()
 

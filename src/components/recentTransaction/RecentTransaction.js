@@ -6,8 +6,14 @@ import { store } from '../../redux/store'
 
 export default function RecentTransaction() {
 
-    let recentEntries = useSelector(state => state.transactions).slice( -4 )
-    console.log(recentEntries , "recent")
+    let months = [ 'January' , 'February' , 'March' ,'April' , 'May' , 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December']
+
+    let getFullDate = ( date ) => {
+
+        let dateObj = new Date( date )
+        return dateObj.getDate() + ` ` + months[ dateObj.getMonth() + 1 ]  + ` ` + dateObj.getFullYear()  
+    }
+    let recentEntries = useSelector(state => state.budgetReducer.transactions).slice( -4 )
 
     return (
         <div className="recent-transaction-component">
@@ -29,7 +35,7 @@ export default function RecentTransaction() {
                             <span className={`${el.type === 'income' ? 'text-green' : 'text-danger' }`}>{el.amount} PKR</span>
                         </div>
                     </div>
-                    <p className="text-secondary fw-light">{el.date}</p>
+                    <p className="text-secondary fw-light">{getFullDate(el.date )}</p>
              
                 </section> 
                 )}

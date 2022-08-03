@@ -24,7 +24,7 @@ import EditTags from "../../components/editTags/EditTags"
 export default function Analytics() {
     
     let prevMonth
-    let state = store.getState()
+    let state = store.getState().budgetReducer
     const date = new Date()
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November' , 'December'];
 
@@ -63,7 +63,7 @@ export default function Analytics() {
     getPrevMonth()
     
     // EARNING INFO
-    let monthlyEarnings = store.getState().monthlyIncome
+    let monthlyEarnings = store.getState().budgetReducer.monthlyIncome
     
     let currentMonthEarning = monthlyEarnings[ date.getMonth() ] 
     
@@ -72,7 +72,7 @@ export default function Analytics() {
     
     
     // EXPENSE INFO
-    let monthlyExpense = store.getState().monthlyExpense 
+    let monthlyExpense = store.getState().budgetReducer.monthlyExpense 
     
     let currentMonthExpense = monthlyExpense [ date.getMonth() ]
     
@@ -109,7 +109,7 @@ export default function Analytics() {
     
     let [ profitPercentChange , loss ] = getPercentChange( currentMonthProfit , prevMonthProfit )
     
-    let categories = store.getState().category
+    let categories = store.getState().budgetReducer.category
     
     // returns object containing most popular category
     let getPopularCategory = ( ) => {
@@ -247,17 +247,12 @@ export default function Analytics() {
                     <section className="remove-tags">
                         <EditTags />
                     </section>
+                    <div className="box mt-5 d-flex justify-content-between gap-5">
+                        <button className="btn btn-danger w-50 " onClick={()=> resetBudget()}> Reset  </button>
+                        <button className="btn btn-success w-50" onClick = {() => navigator.clipboard.writeText(JSON.stringify(state))} > Copy data to clipboard </button>
+                    </div>
                 </section>
-            <button className="btn btn-danger m-5" onClick={()=> resetBudget()}> Reset  </button>
-            <button className="btn btn-success m-5" onClick = {() => { 
-                dispatch({type:"CHECK"})
-                let budget = store.getState()
-                localStorage.setItem("budget" , JSON.stringify(budget))
-            } 
-            }> optimize </button>
-            <button className="btn btn-success m-5" onClick = {() => navigator.clipboard.writeText(JSON.stringify(state))} > Copy data to clipboard </button>
             </div>
-            <p className='text-center'>work in progress...</p>
 
 
         </div>

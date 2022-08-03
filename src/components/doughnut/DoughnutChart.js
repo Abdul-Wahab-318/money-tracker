@@ -8,11 +8,11 @@ import {store } from '../../redux/store'
 
 export default function DoughnutChart() {
     
-    let subCatAmount = store.getState().category.map( subCat => {
+    let subCatAmount = store.getState().budgetReducer.category.map( subCat => {
         return subCat.subCategory.map( el => el.amount)
     }) ;
 
-    let subCatTitle = store.getState().category.map( subCat => {
+    let subCatTitle = store.getState().budgetReducer.category.map( subCat => {
         return subCat.subCategory.map( el => el.title)
     }) ;
 

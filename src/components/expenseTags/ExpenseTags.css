@@ -38,6 +38,9 @@
     outline: 2px solid var(--bs-primary);
 
 }
+.monthly-expenses .section-heading select {
+    background-color: white;
+}
 @media (max-width : 576px)
 {
     .expense-tags-cards{

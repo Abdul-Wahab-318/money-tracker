@@ -2,7 +2,6 @@ import React , { useState } from 'react'
 import "./EditTags.css"
 import { useDispatch } from 'react-redux'
 import {store} from "../../redux/store"
-import { bindActionCreators } from 'redux';
 import save from "../../images/save.png"
 import edit from "../../images/edit.png"
 import deleteIcon from "../../images/delete.png"
@@ -12,7 +11,8 @@ export default function RemoveTags() {
 
     let alert = useAlert()
     let dispatch = useDispatch() ; 
-    let [ expenseTags , setExpenseTags ] = useState( store.getState().expenseTags ) 
+    let [ expenseTags , setExpenseTags ] = useState( store.getState().budgetReducer.expenseTags ) 
+    let numberOfTags = expenseTags.length
     let [ readOnly , setReadOnly ] = useState(true) // will change later
     let [ inputBG , setInputBG ] = useState("bg-error")
 
@@ -32,7 +32,7 @@ export default function RemoveTags() {
         setExpenseTags( newTags )
         dispatch({ type : 'DELETE_EXPENSE_TAGS' , payload : newTags })
 
-        let budget = store.getState()
+        let budget = store.getState().budgetReducer
         localStorage.setItem("budget" , JSON.stringify( budget ) )
 
         alert.show( " Tag Deleted  ")
@@ -43,7 +43,7 @@ export default function RemoveTags() {
     let handleEdit = () => {
         dispatch({ type : 'EDIT_EXPENSE_TAGS' , payload : expenseTags })
 
-        let budget = store.getState()
+        let budget = store.getState().budgetReducer
         localStorage.setItem("budget" , JSON.stringify( budget ) )
 
         alert.show( " Tag Edited  ")
@@ -68,7 +68,7 @@ export default function RemoveTags() {
             <div className="remove-tags-inner">
                 <h6 className='mb-4'>Edit Expense Tags</h6>
                 <div className="expense-tag-field-parent">
-                    { expenseTags.map( (el, ind) => 
+                    { numberOfTags !== 0 ? expenseTags.map( (el, ind) => 
                     <div className='expense-tag-field d-flex align-items-center' key={ind}> 
                         <input type="text" value={el} id={ind} readOnly= {readOnly}
                         className = {inputBG}
@@ -83,7 +83,10 @@ export default function RemoveTags() {
                             }
                             <button className='p-2 ms-2 btn ' onClick = { () => deleteTag(el) }><img src={deleteIcon} width={25} alt="" /></button>
                         </div>
-                    </div> ) }
+                    </div> ) 
+                    :
+                    <p className='text-center'>No tags found</p>    
+                }
 
                 </div>
             </div>

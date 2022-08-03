@@ -30,8 +30,6 @@ let isSameCategory = (state , action)=>{
 let isSameSubCategory = ( repeatedCategory , action )=>{
 
     let sameSubCat = repeatedCategory.subCategory.find( subCat => subCat.title === action.payload.subCategory)
-    console.log("SAME SUB CATEGORY FOUND",sameSubCat)
-    
     return sameSubCat
 
 }
@@ -250,11 +248,14 @@ export let budgetReducer = (state = initialBudget , action) => {
                     expenseTags : action.payload
                 }
 
-        // will change this later
-        case 'CHECK' : 
+        
+        case 'SAVE_BUDGET' : 
             return {
-                ...state , 
+                ...action.payload , 
             }
+        
+        case 'LOGOUT' : 
+            return initialState
 
         case 'RESET' :
             return initialState 

@@ -4,6 +4,7 @@ import { useDispatch , useSelector} from 'react-redux';
 import {store} from '../../redux/store' 
 import { useFormik } from 'formik';
 import {useAlert} from 'react-alert'
+import { updateBudget } from '../../api/api';
 import * as Yup from 'yup';
 
 export default function Transfer() {
@@ -12,8 +13,8 @@ export default function Transfer() {
     const dispatch = useDispatch()
 
     const categoryTags = useSelector(state => state.categoryTags)
-    const subCategoryTags = [ ...new Set( useSelector(state => state.subCategoryTags).map( el => el.subCategory) ) ]  
-    const incomeTags =   [ ...new Set(useSelector(state => state.incomeTags)) ]  
+    const subCategoryTags = [ ...new Set( useSelector(state => state.budgetReducer.subCategoryTags).map( el => el.subCategory) ) ]  
+    const incomeTags =   [ ...new Set(useSelector(state => state.budgetReducer.incomeTags)) ]  
 
     let date = new Date()
     let currentDate = `${date.getDate().toString()} / ${ ( date.getMonth()+1 ).toString() } / ${date.getFullYear().toString()}`
@@ -51,10 +52,10 @@ export default function Transfer() {
           amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
 
           note: Yup.string()
-            .max(30, 'Must be 30 characters or less')
+            .max(70, 'Must be 70 characters or less')
 
         }),
-        onSubmit: ( values , {resetForm} ) => {
+        onSubmit: async ( values , {resetForm} ) => {
 
             if( values.from === values.to )
             {
@@ -70,10 +71,11 @@ export default function Transfer() {
 
             try{
 
-                dispatch({type : 'TRANSFER' , payload : {...values , to: values.to.trim() , from : values.from.trim()}})
-                dispatch({ type : "CHECK" })    
+                dispatch({type : 'TRANSFER' , payload : {...values , to: values.to.trim() , from : values.from.trim()}})   
+                let budget = store.getState().budgetReducer
+                await updateBudget( budget )
+
                 alert.success("Transferred")
-                let budget = store.getState()
                 localStorage.setItem("budget" , JSON.stringify(budget) )
 
                 resetForm()
