@@ -1,13 +1,13 @@
 import URL from "../api"
 import { store } from "../redux/store"
 
-let isLoggedIn = store.getState().userReducer._id
 
 export let updateBudget = async ( body ) => {
 
-    if ( !isLoggedIn ) 
-    return 
-
+    let isLoggedIn = store.getState().userReducer._id
+    if ( !isLoggedIn )
+    return
+    
     try{
         await fetch(`${URL}/budget/updateBudget` ,
         { 
