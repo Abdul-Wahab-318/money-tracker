@@ -48,7 +48,7 @@ export default function IncomeForm() {
           .max(20, 'Must be 20 characters or less')
           .required("Sub Category is required"),
           
-          amount: Yup.number().positive("Amount must be positive").required('Amount Required'),
+          amount: Yup.number().moreThan( -1 , "Amount cannot be negative").required('Amount Required'),
           note: Yup.string()
             .max(70, 'Must be 70 characters or less')
 

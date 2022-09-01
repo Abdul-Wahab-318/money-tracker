@@ -7,7 +7,7 @@ export let updateBudget = async ( body ) => {
     let isLoggedIn = store.getState().userReducer._id
     if ( !isLoggedIn )
     return
-    
+
     try{
         await fetch(`${URL}/budget/updateBudget` ,
         { 

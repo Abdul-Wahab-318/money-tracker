@@ -148,28 +148,29 @@ export let budgetReducer = (state = initialBudget , action) => {
             }
         
         case "ADD_EXPENSE" :
-
+            console.log("ADDING EXPENSE")
             state.monthlyExpense[ new Date().getMonth() ] += action.payload.amount
 
             let { mainCategoryName } = action.payload
             let toBeUpdated = state.category.find(el=> el.title === mainCategoryName)
             toBeUpdated.amount -= action.payload.amount
+            toBeUpdated.subCategory = toBeUpdated.subCategory.map(el => {
+                
+                if(el.title === action.payload.from)
+                    el.amount -= action.payload.amount
+
+                return el
+
+            }).filter( el => el.amount > 0 )
 
             return {
                 ...state ,
                 category : [
-                    ...state.category.filter(el=> el.title !== mainCategoryName) , // categories that dont need to be changed
+                    ...state.category.filter(el=> ( el.title !== mainCategoryName ) ) , // categories that dont need to be changed
                     {
-                        ...toBeUpdated,
-                        subCategory : toBeUpdated.subCategory.map(el => {
-                            if(el.title === action.payload.from)
-                            {
-                                el.amount -= action.payload.amount
-                            }
-                            return el
-                        })//.filter( el => el.amount !== 0)
+                        ...toBeUpdated
                     }
-                ] ,
+                ].filter( el => el.amount > 0 ),
 
                 expenseTags : [... new Set([...state.expenseTags , action.payload.tags])] ,
                 transactions : [
@@ -215,7 +216,7 @@ export let budgetReducer = (state = initialBudget , action) => {
 
                                   return subCat
                                 } 
-                                )//.filter( subCat => subCat.amount > 0 )
+                                ).filter( subCat => subCat.amount > 0 )
 
                                 return el
                         }

@@ -70,12 +70,6 @@ export default function ExpenseForm() {
                 return
             }
 
-            try{
-
-            }catch( err )
-            {
-                
-            }
             dispatch({type : "ADD_EXPENSE" , payload : {...values , from : values.from.trim(), mainCategoryName } })
             budgetState = store.getState().budgetReducer
 
