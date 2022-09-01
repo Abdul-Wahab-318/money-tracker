@@ -19,7 +19,7 @@ import { VscTriangleUp } from 'react-icons/vsc';
 import { VscTriangleDown } from 'react-icons/vsc';
 import ExpenseTags from '../../components/expenseTags/ExpenseTags';
 import EditTags from "../../components/editTags/EditTags"
-
+import RemoveSubCategoryTags from '../../components/removeSubCategoryTags/RemoveSubCategoryTags';
 
 export default function Analytics() {
     
@@ -246,6 +246,9 @@ export default function Analytics() {
                     </section>
                     <section className="remove-tags">
                         <EditTags />
+                    </section>
+                    <section className="remove-subcategory-tags">
+                        <RemoveSubCategoryTags />
                     </section>
                     <div className="box mt-5 d-flex justify-content-between gap-5">
                         <button className="btn btn-danger w-50 " onClick={()=> resetBudget()}> Reset  </button>

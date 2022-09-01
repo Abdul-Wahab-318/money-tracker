@@ -9,9 +9,7 @@ let initialState = {
     monthlyIncome : new Array(12).fill(0) , 
     monthlyExpense : new Array(12).fill(0) , 
 }
-
-let removeSubCategory = "" // when a subcategory amount goes becomes 0 it gets assigned its name then we remove it from our state  
-
+  
 let initialBudget = localStorage.getItem("budget") ? JSON.parse( localStorage.getItem("budget") ) : initialState 
 
 let isSameCategory = (state , action)=>{
@@ -25,7 +23,6 @@ let isSameCategory = (state , action)=>{
    return updatedCat
 
 }
-
 
 let isSameSubCategory = ( repeatedCategory , action )=>{
 
@@ -67,7 +64,17 @@ let updateCategory = (category , action)=>{
 
 }
 
+let getSubCategoryTags = ( state , newTag ) => {
 
+    if ( state.subCategoryTags.every( tag => tag.subCategory !== newTag.subCategory ))
+    return [
+        ...state.subCategoryTags , 
+        { ...newTag }
+    ]
+    else
+    return state.subCategoryTags
+
+} 
 
 export let budgetReducer = (state = initialBudget , action) => {
 
@@ -96,15 +103,9 @@ export let budgetReducer = (state = initialBudget , action) => {
                             date : new Date().toDateString()
                         }   
                     ],
-                    subCategoryTags : [...new Set( 
-                        [
-                            ...state.subCategoryTags ,
-                            {subCategory : action.payload.subCategory , mainCategory : action.payload.to}
-                        ] 
-                        )],
-
+                    subCategoryTags : getSubCategoryTags( state ,{ subCategory : action.payload.subCategory , mainCategory : action.payload.to}),
                     categoryTags : [...new Set( [...state.categoryTags , action.payload.to] )],
-                    incomeTags : [...state.incomeTags , action.payload.tags]
+                    incomeTags : [ ... new Set( [...state.incomeTags , action.payload.tags] )]
                 }
             }
             
@@ -136,14 +137,9 @@ export let budgetReducer = (state = initialBudget , action) => {
                         date : new Date().toDateString()
                     }   
                 ],
-                subCategoryTags : [...new Set( 
-                    [
-                        ...state.subCategoryTags ,
-                        {subCategory : action.payload.subCategory , mainCategory : action.payload.to}
-                    ] 
-                    )],
+                subCategoryTags : getSubCategoryTags( state ,{ subCategory : action.payload.subCategory , mainCategory : action.payload.to}  ),
                 categoryTags : [...new Set( [...state.categoryTags , action.payload.to] )],
-                incomeTags : [...state.incomeTags , action.payload.tags]
+                incomeTags : [ ... new Set( [...state.incomeTags , action.payload.tags] )]
 
             }
         
@@ -247,6 +243,12 @@ export let budgetReducer = (state = initialBudget , action) => {
             return  {
                     ...state ,
                     expenseTags : action.payload
+                }
+        
+        case 'DELETE_SUBCATEGORY_TAGS' :
+            return  {
+                    ...state ,
+                    subCategoryTags : action.payload
                 }
 
         
