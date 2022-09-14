@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
-import {store } from '../../redux/store'
+import { store } from '../../redux/store'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -20,6 +19,7 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import ExpenseTags from '../../components/expenseTags/ExpenseTags';
 import EditTags from "../../components/editTags/EditTags"
 import RemoveSubCategoryTags from '../../components/removeSubCategoryTags/RemoveSubCategoryTags';
+import AllTransactions from '../../components/allTransactions/AllTransactions';
 
 export default function Analytics() {
     
@@ -229,6 +229,10 @@ export default function Analytics() {
 
                     <section className="tags">
                         <ExpenseTags/>
+                    </section>
+
+                    <section className='transactions'>
+                        <AllTransactions/>
                     </section>
 
                 </section>

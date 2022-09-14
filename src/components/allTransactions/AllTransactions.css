@@ -1,0 +1,43 @@
+.all-transactions{
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.all-transactions-inner{
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.all-transactions-inner .recent-trans-row:nth-child(2) .caption{
+    border: unset !important;
+}
+
+/* width */
+.all-transactions-inner::-webkit-scrollbar {
+    width: 10px;
+    }
+    
+/* Track */
+.all-transactions-inner::-webkit-scrollbar-track {
+background: #f1f1f1;
+}
+
+/* Handle */
+.all-transactions-inner::-webkit-scrollbar-thumb {
+background: #888;
+}
+
+/* Handle on hover */
+.all-transactions-inner::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
+
+@media ( max-width : 576px )
+{
+    .all-transactions-inner .recent-trans-row .caption span{
+        font-size: 14px;
+    }
+}
