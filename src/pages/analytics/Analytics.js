@@ -79,10 +79,10 @@ export default function Analytics() {
     let prevMonthExpense = monthlyExpense [ prevMonth ]
     
     // Profit and expense of current month
-    let currentMonthProfit = currentMonthEarning - currentMonthExpense
+    let currentMonthProfit =  currentMonthEarning - currentMonthExpense
     
     // Profit of previous month 
-    let prevMonthProfit = prevMonthEarning - prevMonthExpense 
+    let prevMonthProfit =  prevMonthEarning - prevMonthExpense
     
     function getPercentChange ( current , prev )
     {
@@ -91,24 +91,17 @@ export default function Analytics() {
         if ( prev == 0 )
         return [0 , loss]
         
-        let DecimalChange = current / prev  
-        
-        if ( DecimalChange < 1 ) // if there is loss
-        {
-            loss = true 
-            DecimalChange = 1 - DecimalChange ; 
-            
-        }
-        
-        else // if there is profit
-        DecimalChange-- 
-        
-        return [Math.floor( Math.abs( DecimalChange * 100 ) ) , loss]
+        let change = current - prev ;
+        if ( change < 0 ) // if there is loss
+        loss = true 
+ 
+        let percentChange = Math.abs(( change / prev ) * 100) ;     
+
+        return [Math.floor(  percentChange ) , loss]
         
     }
     
     let [ profitPercentChange , loss ] = getPercentChange( currentMonthProfit , prevMonthProfit )
-    
     let categories = store.getState().budgetReducer.category
     
     // returns object containing most popular category
@@ -184,10 +177,18 @@ export default function Analytics() {
                     <div className="imp-info">
                         <div className="imp-info-card">
                             <span>Monthly Profit</span>
-                            {currentMonthProfit < 0 ? <p className='text-danger'>$ {currentMonthProfit}</p> : <p>$ {currentMonthProfit}</p>}
+                            {
+                                currentMonthProfit < 0 ? 
+                                <p className='text-danger'>$ {currentMonthProfit}</p> 
+                                : 
+                                <p className='text-green'>$ {currentMonthProfit}</p>
+                            }
                             <div>
-                            {loss ? <span className="percent-down-badge"> <VscTriangleDown/> { profitPercentChange}%</span> 
-                            : <span className="percent-up-badge"> <VscTriangleUp/> { profitPercentChange}%</span>}
+                            {
+                                loss ? 
+                                <span className="percent-down-badge"> <VscTriangleDown/> { profitPercentChange}%</span> 
+                                : 
+                                <span className="percent-up-badge"> <VscTriangleUp/> { profitPercentChange}%</span>}
                                 <span className='ps-2'>
                                     From previous period
                                 </span>
