@@ -228,13 +228,14 @@ export default function Analytics() {
                         </div>
                     </section>
 
+                    <section className='transactions'>
+                        <AllTransactions/>
+                    </section>
+                    
                     <section className="tags">
                         <ExpenseTags/>
                     </section>
 
-                    <section className='transactions'>
-                        <AllTransactions/>
-                    </section>
 
                 </section>
 
