@@ -23,3 +23,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+.sub-categories div div svg{
+    cursor: pointer;
+}
+
+.editable-amount-field{
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+.editable-amount-field:focus{
+    outline: none ;
+}
+

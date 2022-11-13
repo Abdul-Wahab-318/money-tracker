@@ -256,6 +256,34 @@ export let budgetReducer = (state = initialBudget , action) => {
             return {
                 ...action.payload , 
             }
+
+        case 'UPDATE_AMOUNT' : 
+        let {newSubCategory} = action.payload 
+        return {
+            ...state ,
+            category : state.category.map( el => {
+
+                if ( el.title == action.payload.category )
+                {
+                    el.subCategory = el.subCategory.map( subEl => {
+                        if ( subEl.title == newSubCategory.title )
+                        { 
+                            return newSubCategory 
+                        }
+
+                        return subEl 
+                    })
+
+                    let amountDifference = parseInt( newSubCategory.amount ) - parseInt( action.payload.oldAmount )
+                    el.amount = parseInt(el.amount) + amountDifference
+
+                }
+
+                return el
+
+            })
+
+        }
         
         case 'LOGOUT' : 
             return initialState

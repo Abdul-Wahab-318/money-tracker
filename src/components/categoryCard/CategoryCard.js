@@ -1,7 +1,6 @@
-import React from 'react'
+import React , {useState} from 'react'
 import './CategoryCard.css'
-
-
+import SubCategoryCard from '../subCategoryCard/SubCategoryCard'
 
 export default function CategoryCard(props) {
 
@@ -16,10 +15,7 @@ export default function CategoryCard(props) {
             <div className="sub-categories">
                 {category.subCategory.map((el,ind)=> {
 
-                    return <div key={ind} >
-                                <p>{el.title} </p>
-                                <p className="text-green">{el.amount} PKR </p>
-                            </div>    
+                    return <SubCategoryCard el = {el} key = {ind} category = { category.title } />    
 
                 }  )}
                     
