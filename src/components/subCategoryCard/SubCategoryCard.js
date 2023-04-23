@@ -23,7 +23,7 @@ export default function SubCategoryCard( { el , category } ) {
         if ( amount == el.amount ) 
         return
 
-        if ( amount == '' || amount < 0 ) 
+        if ( amount == '' || amount < 0 || isNaN(amount) ) 
         {
             alert.error("Invalid amount")
             setAmount( el.amount )
@@ -56,7 +56,7 @@ export default function SubCategoryCard( { el , category } ) {
                 type={"number"}
                 min = {0}
                 onKeyDown={(el)=>handleEnter(el.key)}
-                onChange={( el ) => setAmount( el.currentTarget.value ) }
+                onChange={( el ) => setAmount( parseInt(el.currentTarget.value) ) }
                 
                  value={amount}/>
                 </>
