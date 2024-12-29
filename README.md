@@ -4,7 +4,7 @@
 
 **[Live Demo](https://moneytracker-awm.netlify.app/)**
 
-[Home page](./money-1.jpg)
+[Home page](.\money-1.jpg)
 
 
 ---
